@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Section } from "../components";
+import { Layout, Section } from "../components";
 
 const Home = () => {
   return (
@@ -12,11 +12,13 @@ const Home = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Section>
-        {/*
-          PAGE CONTENT GOES HERE
-        */}
-      </Section>
+      <Layout>
+        <Section>
+          {/*
+            PAGE CONTENT GOES HERE
+          */}
+        </Section>
+      </Layout>
     </>
   );
 };
