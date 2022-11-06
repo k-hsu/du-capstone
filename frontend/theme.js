@@ -13,3 +13,7 @@ export const spacing = {
   3.5: "56px",
   4: "64px",
 };
+
+export const globalStyles = `
+  @import url(https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap);
+`;

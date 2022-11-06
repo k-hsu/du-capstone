@@ -1,8 +1,9 @@
+import React from "react";
 import styled from "@emotion/styled";
 
 const StyledText = styled.text`
   ${({ fontFamily }) => `font-family: "${fontFamily}";`}
-  ${({ lineHeight }) => `line-height: ${lineHeight};`}
+  ${({ lineHeight }) => lineHeight ? `line-height: ${lineHeight};` : ""}
 `;
 
 const Text = ({ children, fontFamily = "IBM Plex Sans", ...props }) => {

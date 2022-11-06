@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer should render footer component styling 1`] = `
+<div
+  className="css-xid9kb"
+  direction="row"
+>
+  <text
+    className="css-1jroyh"
+    fontFamily="IBM Plex Sans"
+  >
+    Hello World
+  </text>
+</div>
+`;

@@ -1,3 +1,4 @@
+import React from "react";
 import Flex from "../Flex/Flex";
 import Text from "../Text/Text";
 import { spacing } from "../../theme";

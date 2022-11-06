@@ -1,3 +1,4 @@
+import React from "react";
 import Flex from "../Flex/Flex";
 import Image from "../Image/Image";
 import Text from "../Text/Text";

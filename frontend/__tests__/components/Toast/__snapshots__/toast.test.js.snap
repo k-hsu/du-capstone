@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toast should render error toast component styling 1`] = `
+<div
+  className="css-1ofs8os"
+>
+  <svg
+    aria-hidden={true}
+    fill="currentColor"
+    focusable="false"
+    height={16}
+    preserveAspectRatio="xMidYMid meet"
+    viewBox="0 0 32 32"
+    width={16}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M2,16H2A14,14,0,1,0,16,2,14,14,0,0,0,2,16Zm23.15,7.75L8.25,6.85a12,12,0,0,1,16.9,16.9ZM8.24,25.16A12,12,0,0,1,6.84,8.27L23.73,25.16a12,12,0,0,1-15.49,0Z"
+    />
+  </svg>
+  <p
+    className="css-6idclw"
+  >
+    Error!
+  </p>
+  <p
+    className="css-1eipjt7"
+  >
+    Good bye, toast
+  </p>
+</div>
+`;
+
+exports[`Toast should render success toast component styling 1`] = `
+<div
+  className="css-1lmfvob"
+  type="success"
+>
+  <svg
+    aria-hidden={true}
+    fill="currentColor"
+    focusable="false"
+    height={16}
+    preserveAspectRatio="xMidYMid meet"
+    viewBox="0 0 32 32"
+    width={16}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M13 24L4 15 5.414 13.586 13 21.171 26.586 7.586 28 9 13 24z"
+    />
+  </svg>
+  <p
+    className="css-6idclw"
+  >
+    Success!
+  </p>
+  <p
+    className="css-1eipjt7"
+  >
+    Hello, toast
+  </p>
+</div>
+`;

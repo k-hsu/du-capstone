@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Section should render section component styles 1`] = `
+<section
+  className="css-xacs01"
+>
+  <div
+    className="css-xqmc9"
+  >
+    part me
+  </div>
+</section>
+`;
