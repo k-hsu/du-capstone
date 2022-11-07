@@ -2,7 +2,7 @@
 
 exports[`Header should render header component styling 1`] = `
 <div
-  className="css-f6mbau"
+  className="css-15dhzng"
   direction="row"
 >
   <span
@@ -122,7 +122,7 @@ exports[`Header should render header component styling 1`] = `
     </noscript>
   </span>
   <text
-    className="css-k0dl8c"
+    className="css-1kjt1be"
     fontFamily="IBM Plex Sans"
   >
     Kobi's Capstone Project
