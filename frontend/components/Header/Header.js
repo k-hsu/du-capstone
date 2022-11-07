@@ -7,7 +7,7 @@ import { spacing } from "../../theme";
 const Header = ({ height = spacing["2"], ...props }) => {
   return (
     <Flex
-      p={`${spacing["0.75"]} ${spacing["2"]}`}
+      p={`${spacing["0.75"]} ${spacing["4"]}`}
       gap={spacing["0.25"]}
       {...props}
     >

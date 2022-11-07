@@ -12,8 +12,21 @@ export const spacing = {
   3: "48px",
   3.5: "56px",
   4: "64px",
+  4.5: "72px",
+  5: "80px",
+};
+
+export const fontWeight = {
+  normal: "400",
+  bold: "700",
 };
 
 export const globalStyles = `
   @import url(https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap);
+
+  #__next {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
 `;

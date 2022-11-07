@@ -3,7 +3,8 @@ import styled from "@emotion/styled";
 
 const StyledText = styled.text`
   ${({ fontFamily }) => `font-family: "${fontFamily}";`}
-  ${({ lineHeight }) => lineHeight ? `line-height: ${lineHeight};` : ""}
+  ${({ lineHeight }) => (lineHeight ? `line-height: ${lineHeight};` : "")}
+  ${({ fontWeight }) => (fontWeight ? `font-weight: ${fontWeight};` : "")}
 `;
 
 const Text = ({ children, fontFamily = "IBM Plex Sans", ...props }) => {

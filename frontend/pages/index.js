@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
-import { Layout, Section } from "../components";
+import { Layout, Section, Text } from "../components";
+import { fontWeight } from "../theme";
 
 const Home = () => {
   return (
@@ -15,9 +16,7 @@ const Home = () => {
       </Head>
       <Layout>
         <Section>
-          {/*
-            PAGE CONTENT GOES HERE
-          */}
+          <Text fontWeight={fontWeight.bold}>My Library</Text>
         </Section>
       </Layout>
     </>

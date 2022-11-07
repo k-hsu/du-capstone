@@ -3,7 +3,7 @@
 exports[`Layout should render layout component styles 1`] = `
 [
   <div
-    className="css-1429zan"
+    className="css-f6mbau"
     direction="row"
   >
     <span
@@ -123,7 +123,7 @@ exports[`Layout should render layout component styles 1`] = `
       </noscript>
     </span>
     <text
-      className="css-q93ph9"
+      className="css-k0dl8c"
       fontFamily="IBM Plex Sans"
     >
       Kobi's Capstone Project
@@ -131,11 +131,11 @@ exports[`Layout should render layout component styles 1`] = `
   </div>,
   "children",
   <div
-    className="css-xid9kb"
+    className="css-pkc6ac"
     direction="row"
   >
     <text
-      className="css-1jroyh"
+      className="css-yma8y4"
       fontFamily="IBM Plex Sans"
     >
       Hello World

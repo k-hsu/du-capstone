@@ -2,11 +2,11 @@
 
 exports[`Footer should render footer component styling 1`] = `
 <div
-  className="css-xid9kb"
+  className="css-pkc6ac"
   direction="row"
 >
   <text
-    className="css-1jroyh"
+    className="css-yma8y4"
     fontFamily="IBM Plex Sans"
   >
     Hello World

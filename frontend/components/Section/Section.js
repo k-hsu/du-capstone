@@ -6,8 +6,8 @@ const StyledSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1 1 auto;
-  padding: ${spacing["3"]} ${spacing["1"]};
+  flex: 1 0 auto;
+  padding: ${spacing["2.5"]} ${spacing["4"]};
   background: #dfdfdf;
   margin: 0;
 `;

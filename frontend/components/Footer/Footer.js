@@ -5,7 +5,7 @@ import { spacing } from "../../theme";
 
 const Footer = (props) => {
   return (
-    <Flex p={`${spacing["0.75"]} ${spacing["2"]}`} {...props}>
+    <Flex p={`${spacing["0.75"]} ${spacing["4"]}`} {...props}>
       <Text>Hello World</Text>
     </Flex>
   );
