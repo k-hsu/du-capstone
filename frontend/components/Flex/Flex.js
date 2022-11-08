@@ -15,6 +15,7 @@ const StyledFlex = styled.div`
   ${({ flexWrap }) => (flexWrap ? `flex-wrap: ${flexWrap};` : "")}
   ${({ backgroundColor }) =>
     backgroundColor ? `background-color: ${backgroundColor};` : ""}
+    ${({ cursor }) => (cursor ? `cursor: ${cursor};` : "")}
 `;
 
 const Flex = ({ children, direction = "row", ...props }) => {

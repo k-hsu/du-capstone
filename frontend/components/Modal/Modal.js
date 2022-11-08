@@ -42,7 +42,9 @@ const Modal = ({
           <StyledModal onClick={(event) => event.stopPropagation()}>
             <Flex justifyContent="space-between" p={`0 0 ${spacing["2"]} 0`}>
               <Text fontWeight="bold">{title}</Text>
-              <Text onClick={onClose}>X</Text>
+              <Text onClick={onClose} cursor="pointer">
+                X
+              </Text>
             </Flex>
             {children}
             <Flex
@@ -54,6 +56,7 @@ const Modal = ({
                 color={color.red}
                 onClick={onClose}
                 lineHeight={spacing["2.5"]}
+                cursor="pointer"
               >
                 {cancelText}
               </Text>

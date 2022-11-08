@@ -1,12 +1,22 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { typography } from "../../theme";
 
 const StyledText = styled.text`
   ${({ fontFamily }) => `font-family: "${fontFamily}";`}
-  ${({ lineHeight }) => (lineHeight ? `line-height: ${lineHeight};` : "")}
-  ${({ fontWeight }) => (fontWeight ? `font-weight: ${fontWeight};` : "")}
+  ${({ as, lineHeight }) =>
+    as || lineHeight
+      ? `line-height: ${lineHeight ?? typography[as].lineHeight};`
+      : ""}
+  ${({ as, fontWeight }) =>
+    as || fontWeight
+      ? `font-weight: ${fontWeight ?? typography[as].fontWeight};`
+      : ""}
+  ${({ as, fontSize }) =>
+    as || fontSize ? `font-size: ${fontSize ?? typography[as].fontSize};` : ""}
   ${({ fontStyle }) => (fontStyle ? `font-style: ${fontStyle};` : "")}
   ${({ color }) => (color ? `color: ${color};` : "")}
+  ${({ cursor }) => (cursor ? `cursor: ${cursor};` : "")}
 `;
 
 const Text = ({ children, fontFamily = "IBM Plex Sans", ...props }) => {

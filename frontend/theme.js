@@ -28,6 +28,24 @@ export const color = {
   red: "#F00",
 };
 
+export const typography = {
+  h1: {
+    lineHeight: spacing["1"],
+    fontWeight: fontWeight.bold,
+    fontSize: spacing["1.75"],
+  },
+  h2: {
+    lineHeight: spacing["0.75"],
+    fontWeight: fontWeight.bold,
+    fontSize: spacing["1.5"],
+  },
+  h3: {
+    lineHeight: spacing["0.5"],
+    fontWeight: fontWeight.bold,
+    fontSize: spacing["1.25"],
+  },
+};
+
 export const globalStyles = `
   @import url(https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap);
 

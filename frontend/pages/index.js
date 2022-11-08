@@ -53,8 +53,10 @@ const Home = () => {
             p={`0 0 ${spacing["2.5"]} 0`}
             width="100%"
           >
-            <Text fontWeight={fontWeight.bold}>My Library</Text>
-            <Button onClick={onAddBookModalToggle}>+ Add Book</Button>
+            <Text as="h3">My Library</Text>
+            <Button onClick={onAddBookModalToggle}>
+              <Text fontWeight={fontWeight.bold}>+ Add Book</Text>
+            </Button>
           </Flex>
           <Flex width="100%" flexWrap="wrap" gap={spacing["0.75"]}>
             {booksLoading ? (

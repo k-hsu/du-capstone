@@ -1,6 +1,6 @@
 export { default as AddBookModal } from "./AddBookModal";
 export { default as Book } from "./Book";
-// export { default as Breadcrumbs } from "./Breadcrumbs";
+export { default as Breadcrumbs } from "./Breadcrumbs";
 export { default as Button } from "./Button";
 export { default as EmptyState } from "./EmptyState";
 export { default as Flex } from "./Flex";

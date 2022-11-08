@@ -4,11 +4,11 @@ import Image from "../Image/Image";
 import Text from "../Text/Text";
 import { spacing } from "../../theme";
 
-const Header = ({ height = spacing["2"], ...props }) => {
+const Header = ({ height = spacing["2.5"], ...props }) => {
   return (
     <Flex
-      p={`${spacing["0.75"]} ${spacing["4"]}`}
-      gap={spacing["0.25"]}
+      p={`${spacing["0.5"]} ${spacing["4"]}`}
+      gap={spacing["0.75"]}
       {...props}
     >
       <Image
@@ -17,7 +17,9 @@ const Header = ({ height = spacing["2"], ...props }) => {
         width={height}
         height={height}
       />
-      <Text lineHeight={height}>Kobi&apos;s Capstone Project</Text>
+      <Text as="h1" lineHeight={height}>
+        Kobi&apos;s Capstone Project
+      </Text>
     </Flex>
   );
 };
