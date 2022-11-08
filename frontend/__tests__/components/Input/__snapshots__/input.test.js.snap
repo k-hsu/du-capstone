@@ -4,13 +4,13 @@ exports[`Input should render input component styles 1`] = `
 <label
   className="css-1iyoj2o"
 >
-  <text
-    className="css-1wcog2d"
+  <p
+    className="css-z3zo0q"
     fontFamily="IBM Plex Sans"
     fontWeight="700"
   >
     prompt
-  </text>
+  </p>
   <input
     className="css-5jib8k"
   />

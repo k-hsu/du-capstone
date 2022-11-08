@@ -2,30 +2,30 @@
 
 exports[`EmptyState should render empty state component styles of type error 1`] = `
 <div
-  className="css-1lzlark"
+  className="css-agajyl"
   direction="row"
   width="100%"
 >
-  <text
-    className="css-1q6wdtx"
+  <p
+    className="css-v9tx79"
     fontFamily="IBM Plex Sans"
   >
     An error has occured
-  </text>
+  </p>
 </div>
 `;
 
 exports[`EmptyState should render empty state component styles of type loading 1`] = `
 <div
-  className="css-1lzlark"
+  className="css-agajyl"
   direction="row"
   width="100%"
 >
-  <text
-    className="css-1q6wdtx"
+  <p
+    className="css-v9tx79"
     fontFamily="IBM Plex Sans"
   >
     loading...
-  </text>
+  </p>
 </div>
 `;

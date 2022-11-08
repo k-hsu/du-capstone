@@ -44,6 +44,11 @@ export const typography = {
     fontWeight: fontWeight.bold,
     fontSize: spacing["1.25"],
   },
+  p: {
+    lineHeight: 0,
+    fontWeight: fontWeight.normal,
+    fontSize: spacing["1"],
+  },
 };
 
 export const globalStyles = `

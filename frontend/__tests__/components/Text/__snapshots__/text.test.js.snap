@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Text should render default text component styles 1`] = `
+<p
+  className="css-v9tx79"
+  fontFamily="IBM Plex Sans"
+>
+  text mex
+</p>
+`;
+
+exports[`Text should render h1 component styles 1`] = `
+<h1
+  className="css-bpb810"
+  fontFamily="IBM Plex Sans"
+>
+  text mex
+</h1>
+`;
+
+exports[`Text should render h2 component styles 1`] = `
+<h2
+  className="css-gv4mnu"
+  fontFamily="IBM Plex Sans"
+>
+  text mex
+</h2>
+`;
+
+exports[`Text should render h3 component styles 1`] = `
+<h3
+  className="css-1i9hj14"
+  fontFamily="IBM Plex Sans"
+>
+  text mex
+</h3>
+`;

@@ -2,7 +2,7 @@
 
 exports[`Header should render header component styling 1`] = `
 <div
-  className="css-1m9yeco"
+  className="css-1o5finl"
   direction="row"
 >
   <span
@@ -42,7 +42,7 @@ exports[`Header should render header component styling 1`] = `
       <img
         alt=""
         aria-hidden={true}
-        src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2732%27%20height=%2732%27/%3e"
+        src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2740%27%20height=%2740%27/%3e"
         style={
           {
             "background": "none",
@@ -121,11 +121,11 @@ exports[`Header should render header component styling 1`] = `
       />
     </noscript>
   </span>
-  <text
-    className="css-saonad"
+  <h1
+    className="css-tmrh21"
     fontFamily="IBM Plex Sans"
   >
     Kobi's Capstone Project
-  </text>
+  </h1>
 </div>
 `;

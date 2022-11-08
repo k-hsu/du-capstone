@@ -9,44 +9,46 @@ exports[`Modal Snapshot should render modal component styles 1`] = `
     onClick={[Function]}
   >
     <div
-      className="css-m793bu"
+      className="css-1pgkpxz"
       direction="row"
     >
-      <text
-        className="css-1aiuev4"
+      <p
+        className="css-1xwh43r"
         fontFamily="IBM Plex Sans"
         fontWeight="bold"
       >
         Notification
-      </text>
-      <text
-        className="css-1q6wdtx"
+      </p>
+      <p
+        className="css-1mhmsx2"
+        cursor="pointer"
         fontFamily="IBM Plex Sans"
       >
         X
-      </text>
+      </p>
     </div>
     You have been notified of a friend request
     <div
-      className="css-hynqmo"
+      className="css-1nitj1i"
       direction="row"
     >
-      <text
-        className="css-gir8ge"
+      <p
+        className="css-8rk7jl"
         color="#F00"
+        cursor="pointer"
         fontFamily="IBM Plex Sans"
       >
         Cancel
-      </text>
+      </p>
       <button
         className="css-ixr4om"
       >
-        <text
-          className="css-1q6wdtx"
+        <p
+          className="css-v9tx79"
           fontFamily="IBM Plex Sans"
         >
           Submit
-        </text>
+        </p>
       </button>
     </div>
   </div>

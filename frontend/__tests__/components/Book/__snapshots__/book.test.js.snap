@@ -2,21 +2,24 @@
 
 exports[`Book should render book component styles 1`] = `
 <div
-  className="css-q5el3q"
+  className="css-xi7dgk"
+  onClick={[Function]}
+  onMouseEnter={[Function]}
+  onTouchStart={[Function]}
 >
-  <text
-    className="css-1wcog2d"
+  <h2
+    className="css-16w46dx"
     fontFamily="IBM Plex Sans"
-    fontWeight="700"
   >
     Harry Potter and the Chamber of Secrets
-  </text>
-  <text
-    className="css-icl4n5"
+  </h2>
+  <h2
+    className="css-lfm8md"
     fontFamily="IBM Plex Sans"
     fontStyle="italic"
+    fontWeight="400"
   >
     J.K. Rowling
-  </text>
+  </h2>
 </div>
 `;

@@ -19,9 +19,14 @@ const StyledText = styled.text`
   ${({ cursor }) => (cursor ? `cursor: ${cursor};` : "")}
 `;
 
-const Text = ({ children, fontFamily = "IBM Plex Sans", ...props }) => {
+const Text = ({
+  children,
+  as = "p",
+  fontFamily = "IBM Plex Sans",
+  ...props
+}) => {
   return (
-    <StyledText fontFamily={fontFamily} {...props}>
+    <StyledText as={as} fontFamily={fontFamily} {...props}>
       {children}
     </StyledText>
   );

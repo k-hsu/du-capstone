@@ -3,7 +3,7 @@
 exports[`Layout should render layout component styles 1`] = `
 [
   <div
-    className="css-1m9yeco"
+    className="css-1o5finl"
     direction="row"
   >
     <span
@@ -43,7 +43,7 @@ exports[`Layout should render layout component styles 1`] = `
         <img
           alt=""
           aria-hidden={true}
-          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2732%27%20height=%2732%27/%3e"
+          src="data:image/svg+xml,%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20version=%271.1%27%20width=%2740%27%20height=%2740%27/%3e"
           style={
             {
               "background": "none",
@@ -122,25 +122,25 @@ exports[`Layout should render layout component styles 1`] = `
         />
       </noscript>
     </span>
-    <text
-      className="css-saonad"
+    <h1
+      className="css-tmrh21"
       fontFamily="IBM Plex Sans"
     >
       Kobi's Capstone Project
-    </text>
+    </h1>
   </div>,
   "children",
   <div
-    className="css-1tvnu3w"
+    className="css-24gdc"
     direction="row"
   >
-    <text
-      className="css-vofh07"
+    <p
+      className="css-1pk3j1b"
       color="white"
       fontFamily="IBM Plex Sans"
     >
       ©2022 OmniFederal · All Rights Reserved · Hello World
-    </text>
+    </p>
   </div>,
 ]
 `;
