@@ -22,7 +22,9 @@ const App = ({ Component, pageProps }) => {
         `}
       />
       <ApolloProvider client={client}>
-        <Component {...pageProps} />
+        <div id="app-root">
+          <Component {...pageProps} />
+        </div>
       </ApolloProvider>
     </>
   );

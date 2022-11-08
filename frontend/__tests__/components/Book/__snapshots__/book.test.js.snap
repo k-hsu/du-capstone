@@ -2,17 +2,17 @@
 
 exports[`Book should render book component styles 1`] = `
 <div
-  className="css-1ag0urc"
+  className="css-q5el3q"
 >
   <text
-    className="css-1xcebyk"
+    className="css-1wcog2d"
     fontFamily="IBM Plex Sans"
     fontWeight="700"
   >
     Harry Potter and the Chamber of Secrets
   </text>
   <text
-    className="css-mikw06"
+    className="css-icl4n5"
     fontFamily="IBM Plex Sans"
     fontStyle="italic"
   >

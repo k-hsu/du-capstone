@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Text Area should render text area component styles 1`] = `
+<label
+  className="css-1iyoj2o"
+>
+  <text
+    className="css-1wcog2d"
+    fontFamily="IBM Plex Sans"
+    fontWeight="700"
+  >
+    prompt
+  </text>
+  <textarea
+    className="css-5jib8k"
+  />
+</label>
+`;

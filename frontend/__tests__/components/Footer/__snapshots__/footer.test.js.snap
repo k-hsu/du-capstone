@@ -2,14 +2,15 @@
 
 exports[`Footer should render footer component styling 1`] = `
 <div
-  className="css-qmnssj"
+  className="css-1tvnu3w"
   direction="row"
 >
   <text
-    className="css-rsymv"
+    className="css-vofh07"
+    color="white"
     fontFamily="IBM Plex Sans"
   >
-    Hello World
+    ©2022 OmniFederal · All Rights Reserved · Hello World
   </text>
 </div>
 `;

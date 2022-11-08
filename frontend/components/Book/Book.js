@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "@emotion/styled";
 import Text from "../Text/Text";
-import { fontWeight, spacing } from "../../theme";
+import { color, fontWeight, spacing } from "../../theme";
 
 const StyledBook = styled.div`
   display: flex;
   flex-direction: column;
   width: 200px;
   padding: ${spacing["2.5"]} ${spacing["0.75"]};
-  border: 1px solid white;
+  border: 1px solid ${color.white};
 `;
 
 const Book = ({ author: { firstName, lastName }, title }) => {

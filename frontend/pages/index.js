@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import {
+  AddBookModal,
   Book,
   Button,
   EmptyState,
@@ -10,10 +11,24 @@ import {
   Text,
 } from "../components";
 import { fontWeight, spacing } from "../theme";
-import { useGetBooks } from "../api/books";
+import { useGetBooks, useAddBook } from "../api/books";
+import { useFindAuthorByName, useAddAuthor } from "../api/authors";
 
 const Home = () => {
+  const [showAddBookModal, setShowAddBookModal] = useState(false);
   const { books, booksLoading } = useGetBooks();
+  const { refetchAuthorByName } = useFindAuthorByName();
+  const { addAuthor } = useAddAuthor();
+  const { addBook } = useAddBook();
+
+  const onAddBookModalToggle = () => setShowAddBookModal(!showAddBookModal);
+  const onAddBookModalSubmit = async ({ title, author, description }) => {
+    let bookAuthor = await refetchAuthorByName(...author.split(" "));
+    if (!bookAuthor) {
+      bookAuthor = await addAuthor(...author.split(" "));
+    }
+    await addBook(title, bookAuthor.id, null, [], description);
+  };
   return (
     <>
       <Head>
@@ -24,6 +39,12 @@ const Home = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {showAddBookModal && (
+        <AddBookModal
+          onClose={onAddBookModalToggle}
+          onSubmit={onAddBookModalSubmit}
+        />
+      )}
       <Layout>
         <Section>
           <Flex
@@ -33,7 +54,7 @@ const Home = () => {
             width="100%"
           >
             <Text fontWeight={fontWeight.bold}>My Library</Text>
-            <Button>+ Add Book</Button>
+            <Button onClick={onAddBookModalToggle}>+ Add Book</Button>
           </Flex>
           <Flex width="100%" flexWrap="wrap" gap={spacing["0.75"]}>
             {booksLoading ? (

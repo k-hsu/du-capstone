@@ -6,6 +6,7 @@ const StyledText = styled.text`
   ${({ lineHeight }) => (lineHeight ? `line-height: ${lineHeight};` : "")}
   ${({ fontWeight }) => (fontWeight ? `font-weight: ${fontWeight};` : "")}
   ${({ fontStyle }) => (fontStyle ? `font-style: ${fontStyle};` : "")}
+  ${({ color }) => (color ? `color: ${color};` : "")}
 `;
 
 const Text = ({ children, fontFamily = "IBM Plex Sans", ...props }) => {

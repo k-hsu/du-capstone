@@ -61,9 +61,9 @@ export const useAddBook = (
   const mutation = gql`
     mutation addBook(
       $title: String!
-      $authorId: String!
+      $authorId: ID!
       $coverImage: String
-      $categoryIds: [String!]!
+      $categoryIds: [ID!]!
       $description: String
     ) {
       addBook(
@@ -75,18 +75,37 @@ export const useAddBook = (
       ) {
         id
         title
+        author {
+          id
+          firstName
+          lastName
+        }
+        coverImage
+        categories {
+          id
+          name
+        }
+        description
+      }
+    }
+  `;
+  const refetchQuery = gql`
+    query getBooks {
+      getBooks {
+        id
+        title
         coverImage
         author {
           id
           firstName
           lastName
         }
-        description
       }
     }
   `;
   const [add, { loading, error, data }] = useMutation(mutation, {
     variables: { title, authorId, coverImage, categoryIds, description },
+    refetchQueries: () => [{ query: refetchQuery }],
   });
   return {
     addBook: (title, authorId, coverImage, categoryIds, description) =>

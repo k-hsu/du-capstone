@@ -13,6 +13,8 @@ const StyledFlex = styled.div`
     justifyContent ? `justify-content: ${justifyContent};` : ""}
   ${({ alignItems }) => (alignItems ? `align-items: ${alignItems};` : "")}
   ${({ flexWrap }) => (flexWrap ? `flex-wrap: ${flexWrap};` : "")}
+  ${({ backgroundColor }) =>
+    backgroundColor ? `background-color: ${backgroundColor};` : ""}
 `;
 
 const Flex = ({ children, direction = "row", ...props }) => {

@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { spacing } from "../../theme";
+import { color, spacing } from "../../theme";
 
 const StyledButton = styled.button`
-  background-color: white;
-  border: 1px solid black;
+  background-color: ${color.white};
+  border: 1px solid ${color.black};
   border-radius: ${spacing["0.25"]};
-  padding: ${spacing["0.25"]} ${spacing["0.5"]};
+  padding: ${spacing["0.75"]} ${spacing["1.25"]};
+  cursor: pointer;
 `;
 
 const Button = ({ children, ...props }) => {

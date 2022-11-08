@@ -2,12 +2,12 @@
 
 exports[`EmptyState should render empty state component styles of type error 1`] = `
 <div
-  className="css-q1uf87"
+  className="css-1lzlark"
   direction="row"
   width="100%"
 >
   <text
-    className="css-rsymv"
+    className="css-1q6wdtx"
     fontFamily="IBM Plex Sans"
   >
     An error has occured
@@ -17,12 +17,12 @@ exports[`EmptyState should render empty state component styles of type error 1`]
 
 exports[`EmptyState should render empty state component styles of type loading 1`] = `
 <div
-  className="css-q1uf87"
+  className="css-1lzlark"
   direction="row"
   width="100%"
 >
   <text
-    className="css-rsymv"
+    className="css-1q6wdtx"
     fontFamily="IBM Plex Sans"
   >
     loading...

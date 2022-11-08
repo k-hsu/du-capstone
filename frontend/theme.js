@@ -21,10 +21,18 @@ export const fontWeight = {
   bold: "700",
 };
 
+export const color = {
+  white: "#FFF",
+  black: "#000",
+  black60: "rgba(0, 0, 0, 0.60)",
+  red: "#F00",
+};
+
 export const globalStyles = `
   @import url(https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap);
 
-  #__next {
+  #__next,
+  #__next > div {
     display: flex;
     flex-direction: column;
     height: 100%;

@@ -5,7 +5,7 @@ import Footer from "../../../components/Footer/Footer";
 describe("Footer", () => {
   it("should render footer component", () => {
     render(<Footer />);
-    expect(screen.getByText("Hello World")).toBeInTheDocument();
+    expect(screen.getByText(/Hello World/)).toBeInTheDocument();
   });
 
   it("should render footer component styling", () => {

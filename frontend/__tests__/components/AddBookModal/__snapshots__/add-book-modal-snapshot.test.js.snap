@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddBookModal Snapshot should render modal component styles 1`] = `
+<div
+  className="css-2wtgp9"
+>
+  <div
+    className="css-15e9n3k"
+    onClick={[Function]}
+  >
+    <div
+      className="css-m793bu"
+      direction="row"
+    >
+      <text
+        className="css-1aiuev4"
+        fontFamily="IBM Plex Sans"
+        fontWeight="bold"
+      >
+        Add New Book
+      </text>
+      <text
+        className="css-1q6wdtx"
+        fontFamily="IBM Plex Sans"
+      >
+        X
+      </text>
+    </div>
+    <form
+      className="css-1v885rd"
+    >
+      <label
+        className="css-1iyoj2o"
+      >
+        <text
+          className="css-1wcog2d"
+          fontFamily="IBM Plex Sans"
+          fontWeight="700"
+        >
+          Title
+        </text>
+        <input
+          className="css-5jib8k"
+          name="title"
+          onBlur={[Function]}
+          onChange={[Function]}
+        />
+      </label>
+      <label
+        className="css-1iyoj2o"
+      >
+        <text
+          className="css-1wcog2d"
+          fontFamily="IBM Plex Sans"
+          fontWeight="700"
+        >
+          Author
+        </text>
+        <input
+          className="css-5jib8k"
+          name="author"
+          onBlur={[Function]}
+          onChange={[Function]}
+        />
+      </label>
+      <label
+        className="css-1iyoj2o"
+      >
+        <text
+          className="css-1wcog2d"
+          fontFamily="IBM Plex Sans"
+          fontWeight="700"
+        >
+          Description
+        </text>
+        <textarea
+          className="css-5jib8k"
+          name="description"
+          onBlur={[Function]}
+          onChange={[Function]}
+        />
+      </label>
+    </form>
+    <div
+      className="css-hynqmo"
+      direction="row"
+    >
+      <text
+        className="css-gir8ge"
+        color="#F00"
+        fontFamily="IBM Plex Sans"
+      >
+        Cancel
+      </text>
+      <button
+        className="css-ixr4om"
+        onClick={[Function]}
+      >
+        <text
+          className="css-1q6wdtx"
+          fontFamily="IBM Plex Sans"
+        >
+          Add Book
+        </text>
+      </button>
+    </div>
+  </div>
+</div>
+`;
