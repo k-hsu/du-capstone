@@ -1,8 +1,8 @@
 import { books, authors, categories } from '../data/schema.data';
 
 const addBookMutation = `
-  mutation AddBook($title: String!, $authorId: ID!, $categoryIds: [ID!]!) {
-    addBook(title: $title, authorId: $authorId, categoryIds: $categoryIds) {
+  mutation AddBook($title: String!, $authorId: ID!, $coverImage: String, $categoryIds: [ID!]!, $description: String) {
+    addBook(title: $title, authorId: $authorId, coverImage: $coverImage, categoryIds: $categoryIds, description: $description) {
         id
         title
         author {
@@ -10,10 +10,12 @@ const addBookMutation = `
             firstName
             lastName
         }
+        coverImage
         categories {
             id
             name
         }
+        description
     }
   }
   `;
@@ -46,7 +48,9 @@ export const seedData = async testServer => {
           variables: {
             title: book.title,
             authorId: book.author,
-            categoryIds: book.categories
+            coverImage: book.coverImage,
+            categoryIds: book.categories,
+            description: book.description
           }
         })
       )

@@ -6,8 +6,11 @@ describe('schema', () => {
   const server = getTestServer();
 
   beforeEach(async () => {
-    const [bookRes, authorRes, catRes] = await clearData(server);
     const [bookSeedRes, authorSeedRes, catSeedRes] = await seedData(server);
+  });
+
+  afterEach(async () => {
+    const [bookRes, authorRes, catRes] = await clearData(server);
   });
   describe('getBooks', () => {
     const query = `
@@ -135,6 +138,43 @@ describe('schema', () => {
     });
   });
 
+  describe('findAuthorByName', () => {
+    const query = `
+        query findAuthorByName($firstName: String!, $lastName: String!) {
+          findAuthorByName(firstName: $firstName, lastName: $lastName) {
+            id
+            firstName
+            lastName
+            books {
+              id
+              title
+            }
+          }
+        }
+      `;
+    it('should return an author by name', () => {
+      return server
+        .executeOperation({
+          query,
+          variables: { firstName: 'J.K.', lastName: 'Rowling' }
+        })
+        .then(response => {
+          expect(response.body.singleResult.data?.findAuthorByName).toEqual({
+            id: '1',
+            firstName: 'J.K.',
+            lastName: 'Rowling',
+            books: [
+              {
+                id: '1',
+                title: 'Harry Potter and the Chamber of Secrets'
+              }
+            ]
+          });
+          expect(response.body.singleResult.data?.errors).toBeUndefined();
+        });
+    });
+  });
+
   describe('getCategories', () => {
     const query = `
         query {
@@ -198,8 +238,8 @@ describe('schema', () => {
    */
   describe('addBook', () => {
     const mutation = `
-        mutation addBook($title: String!, $authorId: ID!, $categoryIds: [ID!]!) {
-          addBook(title: $title, authorId: $authorId, categoryIds: $categoryIds) {
+        mutation addBook($title: String!, $authorId: ID!, $coverImage: String, $categoryIds: [ID!]!, $description: String) {
+          addBook(title: $title, authorId: $authorId, coverImage: $coverImage, categoryIds: $categoryIds, description: $description) {
             id
             title
             author {
@@ -207,10 +247,12 @@ describe('schema', () => {
               firstName
               lastName
             }
+            coverImage
             categories {
               id
               name
             }
+            description
           }
         }
       `;
@@ -251,6 +293,7 @@ describe('schema', () => {
               firstName: 'Cornelia',
               lastName: 'Funke'
             },
+            coverImage: null,
             categories: [
               {
                 id: '1',
@@ -260,7 +303,8 @@ describe('schema', () => {
                 id: '2',
                 name: 'Fiction'
               }
-            ]
+            ],
+            description: null
           });
           expect(response.body.singleResult.data?.errors).toBeUndefined();
         });
