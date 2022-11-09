@@ -1,5 +1,4 @@
 class Book {
-  static books = [];
   constructor(title, authorId, coverImage, categoryIds, description) {
     const book = {
       id: String(Book.books.length + 1),
@@ -50,5 +49,7 @@ class Book {
     return book.id;
   }
 }
+
+Book.books = []
 
 export default Book;

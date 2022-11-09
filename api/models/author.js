@@ -1,5 +1,4 @@
 class Author {
-  static authors = [];
   constructor(firstName, lastName) {
     const author = {
       id: String(Author.authors.length + 1),
@@ -51,5 +50,7 @@ class Author {
     );
   }
 }
+
+Author.authors = [];
 
 export default Author;

@@ -1,5 +1,4 @@
 class Category {
-  static categories = [];
   constructor(name) {
     const category = {
       id: String(Category.categories.length + 1),
@@ -48,5 +47,7 @@ class Category {
     return category.id;
   }
 }
+
+Category.categories = [];
 
 export default Category;

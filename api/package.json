@@ -8,6 +8,7 @@
   },
   "main": "dist/index.js",
   "scripts": {
+    "lint": "eslint '**/*.js' --ignore-pattern node_modules/ --ignore-pattern coverage/",
     "build": "babel --extensions .js,.jsx ./src -d dist",
     "start": "npm run build && node dist/index.js",
     "dev": "nodemon --exec babel-node src/index.js",
@@ -30,9 +31,11 @@
     "@babel/core": "^7.19.3",
     "@babel/node": "^7.19.1",
     "@babel/preset-env": "^7.19.4",
+    "eslint": "^8.27.0",
     "jest": "^29.1.2",
     "lodash": "^4.17.21",
     "nodemon": "^2.0.20",
-    "prettier": "2.7.1"
+    "prettier": "2.7.1",
+    "prettier-eslint": "^15.0.1"
   }
 }
