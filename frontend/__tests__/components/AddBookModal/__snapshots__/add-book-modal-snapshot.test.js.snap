@@ -3,6 +3,7 @@
 exports[`AddBookModal Snapshot should render modal component styles 1`] = `
 <div
   className="css-2wtgp9"
+  onClick={[Function]}
 >
   <div
     className="css-15e9n3k"
@@ -23,6 +24,8 @@ exports[`AddBookModal Snapshot should render modal component styles 1`] = `
         className="css-7ee2u0"
         cursor="pointer"
         fontFamily="IBM Plex Sans"
+        onClick={[Function]}
+        onKeyDown={[Function]}
         tabIndex={0}
       >
         X
@@ -80,6 +83,7 @@ exports[`AddBookModal Snapshot should render modal component styles 1`] = `
           name="description"
           onBlur={[Function]}
           onChange={[Function]}
+          rows="6"
         />
       </label>
     </form>
@@ -92,6 +96,8 @@ exports[`AddBookModal Snapshot should render modal component styles 1`] = `
         color="#F00"
         cursor="pointer"
         fontFamily="IBM Plex Sans"
+        onClick={[Function]}
+        onKeyDown={[Function]}
         tabIndex={0}
       >
         Cancel

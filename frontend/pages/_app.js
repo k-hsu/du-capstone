@@ -2,6 +2,7 @@ import React from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { Global, css } from "@emotion/react";
 import getConfig from "next/config";
+import ToastProvider from "../providers/ToastProvider/ToastProvider";
 import { globalStyles } from "../theme";
 import "../styles/global.css";
 
@@ -23,7 +24,9 @@ const App = ({ Component, pageProps }) => {
       />
       <ApolloProvider client={client}>
         <div id="app-root">
-          <Component {...pageProps} />
+          <ToastProvider>
+            <Component {...pageProps} />
+          </ToastProvider>
         </div>
       </ApolloProvider>
     </>

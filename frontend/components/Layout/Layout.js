@@ -1,6 +1,7 @@
 import React from "react";
-import Header from "../Header";
-import Footer from "../Footer";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import ToastManager from "../../components/ToastManager/ToastManager";
 
 const Layout = ({ children }) => {
   return (
@@ -8,6 +9,7 @@ const Layout = ({ children }) => {
       <Header />
       {children}
       <Footer />
+      <ToastManager />
     </>
   );
 };

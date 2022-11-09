@@ -10,6 +10,7 @@ import {
   Section,
   Text,
 } from "../components";
+import useToast from "../hooks/useToast";
 import { fontWeight, spacing } from "../theme";
 import { useGetBooks, useAddBookByAuthorName } from "../api/books";
 
@@ -17,15 +18,22 @@ const Home = () => {
   const [showAddBookModal, setShowAddBookModal] = useState(false);
   const { books, booksLoading, booksError } = useGetBooks();
   const { addBook } = useAddBookByAuthorName();
-
-  const onAddBookModalToggle = (event) => {
-    if (!event.key || event.key === "Enter") {
-      setShowAddBookModal(!showAddBookModal);
-    }
+  const [_, addToast] = useToast();
+  const onAddBookModalToggle = () => {
+    setShowAddBookModal(!showAddBookModal);
   };
   const onAddBookModalSubmit = async ({ title, author, description }) => {
-    const [firstName, lastName] = author.split(" ");
-    await addBook(title, firstName, lastName, null, [], description);
+    onAddBookModalToggle();
+    try {
+      const [firstName, lastName] = author.split(" ");
+      await addBook(title, firstName, lastName, null, [], description);
+      addToast({
+        type: "success",
+        message: `${title} was added to the library`,
+      });
+    } catch (error) {
+      addToast({ message: "Something went wrong" });
+    }
   };
 
   return (

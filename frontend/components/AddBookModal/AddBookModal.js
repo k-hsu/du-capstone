@@ -14,23 +14,38 @@ const AddBookModal = ({ onClose, onSubmit }) => {
 
   const onSubmitForm = (results) => {
     onSubmit(results);
-    onClose();
   };
+
+  const { ref, ...titleRegister } = register("title", {
+    required: "title is required",
+  });
 
   return (
     <Modal
       title="Add New Book"
       submitText="Add Book"
-      onClose={onClose}
+      onClose={(e) => {
+        if (!e.key || e.key === "Enter") {
+          onClose();
+        }
+      }}
       onSubmit={(e) => {
-        handleSubmit(onSubmitForm)(e);
+        if (!e.key || e.key === "Enter") {
+          handleSubmit(onSubmitForm)(e);
+        }
       }}
     >
       <Form>
         <Input
           labelText="Title"
           errorMessage={errors.title?.message}
-          {...register("title", { required: "title is required" })}
+          ref={(innerRef) => {
+            if (innerRef) {
+              innerRef.focus();
+            }
+            return ref(innerRef);
+          }}
+          {...titleRegister}
         />
         <Input
           labelText="Author"
@@ -43,6 +58,7 @@ const AddBookModal = ({ onClose, onSubmit }) => {
           })}
         />
         <TextArea
+          rows="6"
           labelText="Description"
           errorMessage={errors.description?.message}
           {...register("description")}

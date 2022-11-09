@@ -13,12 +13,14 @@ const Header = (props) => {
       {...props}
     >
       <Link href="/">
-        <Image
-          src="/DU-Logo-Mark.svg"
-          alt="capstone-logo"
-          width="64px"
-          height="64px"
-        />
+        <Flex alignItems="center" height="100%">
+          <Image
+            src="/DU-Logo-Mark.svg"
+            alt="capstone-logo"
+            width="64px"
+            height="64px"
+          />
+        </Flex>
       </Link>
       <Text as="h1" lineHeight={spacing["1.5"]}>
         Kobi&apos;s Capstone Project

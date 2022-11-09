@@ -26,4 +26,10 @@ describe("Books Detail Page", () => {
       )
     ).toBeInTheDocument();
   });
+
+  it("should show error if data is not loaded correctly", () => {
+    useGetBook.mockReturnValue({ bookError: "Err on the Side of Caution" });
+    render(<BooksDetailPage />);
+    expect(screen.getByText("An error has occured")).toBeInTheDocument();
+  });
 });

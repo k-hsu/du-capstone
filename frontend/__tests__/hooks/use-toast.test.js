@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import ToastProvider from "../../providers/ToastProvider/ToastProvider";
+import ToastManager from "../../components/ToastManager/ToastManager";
 import useToast from "../../hooks/useToast";
 import { render, screen, waitForElementToBeRemoved } from "../../test-utils";
 
@@ -30,6 +31,7 @@ describe("Toast hook", () => {
         <TestComponent
           initialToasts={[{ id: "first-toast", message: "Let's Toast" }]}
         />
+        <ToastManager />
       </ToastProvider>
     );
 
@@ -44,6 +46,7 @@ describe("Toast hook", () => {
             { id: "first-toast", message: "Let's Toast", duration: 1000 },
           ]}
         />
+        <ToastManager />
       </ToastProvider>
     );
     const toast = screen.getByText("Let's Toast");
@@ -60,6 +63,7 @@ describe("Toast hook", () => {
             { id: "second-toast", message: "Toast!" },
           ]}
         />
+        <ToastManager />
       </ToastProvider>
     );
 
