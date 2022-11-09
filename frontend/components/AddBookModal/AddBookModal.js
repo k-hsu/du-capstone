@@ -35,7 +35,12 @@ const AddBookModal = ({ onClose, onSubmit }) => {
         <Input
           labelText="Author"
           errorMessage={errors.author?.message}
-          {...register("author", { required: "author is required" })}
+          {...register("author", {
+            required: "author is required",
+            validate: (value) =>
+              value.split(" ").length === 2 ||
+              "author must have a first name and last name",
+          })}
         />
         <TextArea
           labelText="Description"

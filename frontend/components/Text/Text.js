@@ -16,6 +16,8 @@ const StyledText = styled.text`
     as || fontSize ? `font-size: ${fontSize ?? typography[as].fontSize};` : ""}
   ${({ fontStyle }) => (fontStyle ? `font-style: ${fontStyle};` : "")}
   ${({ color }) => (color ? `color: ${color};` : "")}
+  ${({ textDecoration }) =>
+    textDecoration ? `text-decoration: ${textDecoration};` : ""}
   ${({ cursor }) => (cursor ? `cursor: ${cursor};` : "")}
 `;
 

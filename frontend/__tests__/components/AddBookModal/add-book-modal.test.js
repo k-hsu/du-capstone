@@ -37,7 +37,7 @@ describe("Add Book Modal", () => {
     const titleInput = screen.getAllByRole("textbox")[0];
     await userEvent.type(titleInput, "Eye of the Tiger");
     const authorInput = screen.getAllByRole("textbox")[1];
-    await userEvent.type(authorInput, "Survivor");
+    await userEvent.type(authorInput, "Survivor (band)");
     const descriptionInput = screen.getAllByRole("textbox")[2];
     await userEvent.type(descriptionInput, "The #2 pop song of the year 1982");
     await userEvent.click(submitButton);

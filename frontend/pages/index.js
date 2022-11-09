@@ -11,24 +11,23 @@ import {
   Text,
 } from "../components";
 import { fontWeight, spacing } from "../theme";
-import { useGetBooks, useAddBook } from "../api/books";
-import { useFindAuthorByName, useAddAuthor } from "../api/authors";
+import { useGetBooks, useAddBookByAuthorName } from "../api/books";
 
 const Home = () => {
   const [showAddBookModal, setShowAddBookModal] = useState(false);
-  const { books, booksLoading } = useGetBooks();
-  const { refetchAuthorByName } = useFindAuthorByName();
-  const { addAuthor } = useAddAuthor();
-  const { addBook } = useAddBook();
+  const { books, booksLoading, booksError } = useGetBooks();
+  const { addBook } = useAddBookByAuthorName();
 
-  const onAddBookModalToggle = () => setShowAddBookModal(!showAddBookModal);
-  const onAddBookModalSubmit = async ({ title, author, description }) => {
-    let bookAuthor = await refetchAuthorByName(...author.split(" "));
-    if (!bookAuthor) {
-      bookAuthor = await addAuthor(...author.split(" "));
+  const onAddBookModalToggle = (event) => {
+    if (!event.key || event.key === "Enter") {
+      setShowAddBookModal(!showAddBookModal);
     }
-    await addBook(title, bookAuthor.id, null, [], description);
   };
+  const onAddBookModalSubmit = async ({ title, author, description }) => {
+    const [firstName, lastName] = author.split(" ");
+    await addBook(title, firstName, lastName, null, [], description);
+  };
+
   return (
     <>
       <Head>
@@ -59,8 +58,8 @@ const Home = () => {
             </Button>
           </Flex>
           <Flex width="100%" flexWrap="wrap" gap={spacing["0.75"]}>
-            {booksLoading ? (
-              <EmptyState loading={booksLoading} />
+            {booksLoading || booksError || !books?.length ? (
+              <EmptyState loading={booksLoading} error={booksError} />
             ) : (
               books?.map((book) => <Book key={book.id} {...book} />)
             )}

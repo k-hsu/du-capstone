@@ -42,21 +42,29 @@ const Modal = ({
           <StyledModal onClick={(event) => event.stopPropagation()}>
             <Flex justifyContent="space-between" p={`0 0 ${spacing["2"]} 0`}>
               <Text fontWeight="bold">{title}</Text>
-              <Text onClick={onClose} cursor="pointer">
+              <Text
+                onClick={onClose}
+                onKeyDown={onClose}
+                cursor="pointer"
+                tabIndex={0}
+              >
                 X
               </Text>
             </Flex>
             {children}
             <Flex
               justifyContent="flex-end"
+              alignItems="center"
               gap={spacing["1.5"]}
               p={`${spacing["2"]} 0 0 0`}
             >
               <Text
                 color={color.red}
                 onClick={onClose}
-                lineHeight={spacing["2.5"]}
+                onKeyDown={onClose}
+                lineHeight={0}
                 cursor="pointer"
+                tabIndex={0}
               >
                 {cancelText}
               </Text>

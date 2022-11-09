@@ -13,16 +13,17 @@ exports[`AddBookModal Snapshot should render modal component styles 1`] = `
       direction="row"
     >
       <p
-        className="css-1xwh43r"
+        className="css-kxn7ez"
         fontFamily="IBM Plex Sans"
         fontWeight="bold"
       >
         Add New Book
       </p>
       <p
-        className="css-1mhmsx2"
+        className="css-7ee2u0"
         cursor="pointer"
         fontFamily="IBM Plex Sans"
+        tabIndex={0}
       >
         X
       </p>
@@ -34,7 +35,7 @@ exports[`AddBookModal Snapshot should render modal component styles 1`] = `
         className="css-1iyoj2o"
       >
         <p
-          className="css-z3zo0q"
+          className="css-1v2p52x"
           fontFamily="IBM Plex Sans"
           fontWeight="700"
         >
@@ -51,7 +52,7 @@ exports[`AddBookModal Snapshot should render modal component styles 1`] = `
         className="css-1iyoj2o"
       >
         <p
-          className="css-z3zo0q"
+          className="css-1v2p52x"
           fontFamily="IBM Plex Sans"
           fontWeight="700"
         >
@@ -68,7 +69,7 @@ exports[`AddBookModal Snapshot should render modal component styles 1`] = `
         className="css-1iyoj2o"
       >
         <p
-          className="css-z3zo0q"
+          className="css-1v2p52x"
           fontFamily="IBM Plex Sans"
           fontWeight="700"
         >
@@ -83,14 +84,15 @@ exports[`AddBookModal Snapshot should render modal component styles 1`] = `
       </label>
     </form>
     <div
-      className="css-1nitj1i"
+      className="css-1a6mal2"
       direction="row"
     >
       <p
-        className="css-8rk7jl"
+        className="css-13kh8s7"
         color="#F00"
         cursor="pointer"
         fontFamily="IBM Plex Sans"
+        tabIndex={0}
       >
         Cancel
       </p>
@@ -99,7 +101,7 @@ exports[`AddBookModal Snapshot should render modal component styles 1`] = `
         onClick={[Function]}
       >
         <p
-          className="css-v9tx79"
+          className="css-ms6223"
           fontFamily="IBM Plex Sans"
         >
           Add Book

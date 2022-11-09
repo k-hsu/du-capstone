@@ -1,23 +1,26 @@
 import React from "react";
 import Flex from "../Flex/Flex";
 import Image from "../Image/Image";
+import Link from "../Link/Link";
 import Text from "../Text/Text";
 import { spacing } from "../../theme";
 
-const Header = ({ height = spacing["2.5"], ...props }) => {
+const Header = (props) => {
   return (
     <Flex
-      p={`${spacing["0.5"]} ${spacing["4"]}`}
+      p={`${spacing["0.75"]} ${spacing["4"]}`}
       gap={spacing["0.75"]}
       {...props}
     >
-      <Image
-        src="/DU-Logo-Mark.svg"
-        alt="capstone-logo"
-        width={height}
-        height={height}
-      />
-      <Text as="h1" lineHeight={height}>
+      <Link href="/">
+        <Image
+          src="/DU-Logo-Mark.svg"
+          alt="capstone-logo"
+          width="64px"
+          height="64px"
+        />
+      </Link>
+      <Text as="h1" lineHeight={spacing["1.5"]}>
         Kobi&apos;s Capstone Project
       </Text>
     </Flex>

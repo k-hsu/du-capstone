@@ -42,37 +42,6 @@ export const useGetAuthor = (id) => {
   };
 };
 
-export const useFindAuthorByName = (firstName, lastName) => {
-  const query = gql`
-    query findAuthorByName($firstName: String!, $lastName: String!) {
-      findAuthorByName(firstName: $firstName, lastName: $lastName) {
-        id
-        firstName
-        lastName
-        books {
-          id
-          title
-        }
-      }
-    }
-  `;
-  const { loading, error, data, refetch } = useQuery(query, {
-    variables: { firstName, lastName },
-  });
-  const refetchAuthorByName = async (firstName, lastName) => {
-    const {
-      data: { findAuthorByName },
-    } = await refetch({ firstName, lastName });
-    return findAuthorByName;
-  };
-  return {
-    authorByNameLoading: loading,
-    authorByNameError: error,
-    authorByName: data?.findAuthorByName || [],
-    refetchAuthorByName,
-  };
-};
-
 export const useAddAuthor = (firstName, lastName) => {
   const mutation = gql`
     mutation addAuthor($firstName: String!, $lastName: String!) {

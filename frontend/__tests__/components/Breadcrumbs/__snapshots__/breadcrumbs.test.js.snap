@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breadcrumbs should render breadcrumbs component styles 1`] = `
+<div
+  className="css-12u5n7l"
+  direction="row"
+>
+  <p
+    className="css-ms6223"
+    fontFamily="IBM Plex Sans"
+  >
+    <a
+      className="css-1486csp"
+      color="#000"
+      fontFamily="IBM Plex Sans"
+      href="/to-the-crumb"
+      textDecoration="none"
+    >
+      crumb
+    </a>
+  </p>
+  <p
+    className="css-ms6223"
+    fontFamily="IBM Plex Sans"
+  >
+    /
+  </p>
+  <p
+    className="css-1v2p52x"
+    fontFamily="IBM Plex Sans"
+    fontWeight="700"
+  >
+    bread
+  </p>
+</div>
+`;

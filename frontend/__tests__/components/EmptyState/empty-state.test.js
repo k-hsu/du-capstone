@@ -8,7 +8,7 @@ describe("EmptyState", () => {
     expect(screen.getByText("loading...")).toBeInTheDocument();
   });
   it("should render empty state component of type error", () => {
-    render(<EmptyState />);
+    render(<EmptyState error />);
     expect(screen.getByText("An error has occured")).toBeInTheDocument();
   });
   it("should render empty state component styles of type loading", () => {
@@ -17,6 +17,11 @@ describe("EmptyState", () => {
     expect(tree).toMatchSnapshot();
   });
   it("should render empty state component styles of type error", () => {
+    const component = renderer.create(<EmptyState />);
+    const tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+  it("should render empty state component styles of type other", () => {
     const component = renderer.create(<EmptyState />);
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();

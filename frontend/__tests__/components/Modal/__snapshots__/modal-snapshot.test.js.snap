@@ -13,30 +13,32 @@ exports[`Modal Snapshot should render modal component styles 1`] = `
       direction="row"
     >
       <p
-        className="css-1xwh43r"
+        className="css-kxn7ez"
         fontFamily="IBM Plex Sans"
         fontWeight="bold"
       >
         Notification
       </p>
       <p
-        className="css-1mhmsx2"
+        className="css-7ee2u0"
         cursor="pointer"
         fontFamily="IBM Plex Sans"
+        tabIndex={0}
       >
         X
       </p>
     </div>
     You have been notified of a friend request
     <div
-      className="css-1nitj1i"
+      className="css-1a6mal2"
       direction="row"
     >
       <p
-        className="css-8rk7jl"
+        className="css-13kh8s7"
         color="#F00"
         cursor="pointer"
         fontFamily="IBM Plex Sans"
+        tabIndex={0}
       >
         Cancel
       </p>
@@ -44,7 +46,7 @@ exports[`Modal Snapshot should render modal component styles 1`] = `
         className="css-ixr4om"
       >
         <p
-          className="css-v9tx79"
+          className="css-ms6223"
           fontFamily="IBM Plex Sans"
         >
           Submit

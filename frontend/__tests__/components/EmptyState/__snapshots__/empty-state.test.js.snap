@@ -7,10 +7,11 @@ exports[`EmptyState should render empty state component styles of type error 1`]
   width="100%"
 >
   <p
-    className="css-v9tx79"
+    className="css-abldy6"
     fontFamily="IBM Plex Sans"
+    fontStyle="italic"
   >
-    An error has occured
+    There is nothing here
   </p>
 </div>
 `;
@@ -22,10 +23,27 @@ exports[`EmptyState should render empty state component styles of type loading 1
   width="100%"
 >
   <p
-    className="css-v9tx79"
+    className="css-1dyeq18"
     fontFamily="IBM Plex Sans"
+    fontStyle="none"
   >
     loading...
+  </p>
+</div>
+`;
+
+exports[`EmptyState should render empty state component styles of type other 1`] = `
+<div
+  className="css-agajyl"
+  direction="row"
+  width="100%"
+>
+  <p
+    className="css-abldy6"
+    fontFamily="IBM Plex Sans"
+    fontStyle="italic"
+  >
+    There is nothing here
   </p>
 </div>
 `;

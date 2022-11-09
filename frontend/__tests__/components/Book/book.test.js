@@ -2,6 +2,9 @@ import React from "react";
 import { render, screen, renderer } from "../../../test-utils";
 import Book from "../../../components/Book/Book";
 
+jest.mock("next/router", () => ({
+  useRouter: () => ({ push: () => {} }),
+}));
 describe("Book", () => {
   it("should render book component", () => {
     render(

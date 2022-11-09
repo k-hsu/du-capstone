@@ -5,6 +5,7 @@ import {
   useGetBooks,
   useGetBook,
   useAddBook,
+  useAddBookByAuthorName,
   useRemoveBook,
 } from "../../api/books";
 
@@ -15,8 +16,12 @@ describe("Books test", () => {
     const { books } = useGetBooks();
     const { book } = useGetBook();
     const { addBook } = useAddBook();
+    const { addBook: addBookByAuthorName } = useAddBookByAuthorName();
     const { removeBook } = useRemoveBook();
     addBook({
+      variables: {},
+    });
+    addBookByAuthorName({
       variables: {},
     });
     removeBook({
