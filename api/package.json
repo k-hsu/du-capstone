@@ -9,7 +9,7 @@
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint '**/*.js' --ignore-pattern node_modules/ --ignore-pattern coverage/",
-    "build": "babel --extensions .js,.jsx ./src -d dist",
+    "build": "rm -rf ./dist && babel --extensions .js,.jsx ./src -d dist",
     "start": "npm run build && node dist/index.js",
     "dev": "nodemon --exec babel-node src/index.js",
     "test": "jest",

@@ -1,5 +1,5 @@
 import { gql } from 'apollo-server-express';
-import { Author, Book, Category } from '../models/index';
+import { Author, Book, Category } from './models/index';
 
 export const typeDefs = gql`
   "An individual book, contains a title, author, and an array of category ids"

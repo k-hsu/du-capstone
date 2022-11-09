@@ -2,7 +2,7 @@ import { ApolloServer } from '@apollo/server';
 import { merge } from 'lodash';
 import { gql } from 'apollo-server-express';
 import { resolvers, typeDefs } from '../../src/schema';
-import { Author, Book, Category } from '../../models/index';
+import { Author, Book, Category } from '../../src/models/index';
 
 const seedingTypeDefs = gql`
   input AuthorData {
