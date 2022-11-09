@@ -14,10 +14,9 @@ import { useGetBook } from "../../api/books";
 const BooksDetailPage = () => {
   const router = useRouter();
   const { book, bookLoading, bookError } = useGetBook(router.query.id);
-
   return (
     <Layout>
-      {bookLoading || bookError || !book ? (
+      {bookLoading || bookError || !Object.keys(book).length ? (
         <Section>
           <EmptyState loading={bookLoading} error={bookError} />
         </Section>

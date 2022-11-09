@@ -12,7 +12,7 @@ exports[`Input should render input component styles 1`] = `
     prompt
   </p>
   <input
-    className="css-5jib8k"
+    className="css-mn8zue"
   />
 </label>
 `;

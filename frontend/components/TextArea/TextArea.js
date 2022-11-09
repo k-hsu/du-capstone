@@ -11,6 +11,7 @@ const StyledLabel = styled.label`
 const StyledTextArea = styled.textarea`
   border-radius: ${spacing["0.5"]};
   padding: ${spacing["0.5"]} ${spacing["0.75"]};
+  font-family: "IBM Plex Sans", sans-serif;
 `;
 
 const TextArea = forwardRef(

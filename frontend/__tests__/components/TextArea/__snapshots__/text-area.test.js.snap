@@ -12,7 +12,7 @@ exports[`Text Area should render text area component styles 1`] = `
     prompt
   </p>
   <textarea
-    className="css-5jib8k"
+    className="css-mn8zue"
   />
 </label>
 `;

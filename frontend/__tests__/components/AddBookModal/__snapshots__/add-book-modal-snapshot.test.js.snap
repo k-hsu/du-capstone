@@ -45,7 +45,7 @@ exports[`AddBookModal Snapshot should render modal component styles 1`] = `
           Title
         </p>
         <input
-          className="css-5jib8k"
+          className="css-mn8zue"
           name="title"
           onBlur={[Function]}
           onChange={[Function]}
@@ -62,7 +62,7 @@ exports[`AddBookModal Snapshot should render modal component styles 1`] = `
           Author
         </p>
         <input
-          className="css-5jib8k"
+          className="css-mn8zue"
           name="author"
           onBlur={[Function]}
           onChange={[Function]}
@@ -79,7 +79,7 @@ exports[`AddBookModal Snapshot should render modal component styles 1`] = `
           Description
         </p>
         <textarea
-          className="css-5jib8k"
+          className="css-mn8zue"
           name="description"
           onBlur={[Function]}
           onChange={[Function]}
