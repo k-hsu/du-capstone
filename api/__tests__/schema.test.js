@@ -6,11 +6,8 @@ describe('schema', () => {
   const server = getTestServer();
 
   beforeEach(async () => {
-    await seedData(server);
-  });
-
-  afterEach(async () => {
-    await clearData(server);
+    const [bookRes, authorRes, catRes] = await clearData(server);
+    const [bookSeedRes, authorSeedRes, catSeedRes] = await seedData(server);
   });
   describe('getBooks', () => {
     const query = `
@@ -201,8 +198,8 @@ describe('schema', () => {
    */
   describe('addBook', () => {
     const mutation = `
-        mutation addBook($title: String!, $authorId: ID!, $coverImage: String, $categoryIds: [ID!]!, $description: String) {
-          addBook(title: $title, authorId: $authorId, coverImage: $coverImage, categoryIds: $categoryIds, description: $description) {
+        mutation addBook($title: String!, $authorId: ID!, $categoryIds: [ID!]!) {
+          addBook(title: $title, authorId: $authorId, categoryIds: $categoryIds) {
             id
             title
             author {
@@ -210,12 +207,10 @@ describe('schema', () => {
               firstName
               lastName
             }
-            coverImage
             categories {
               id
               name
             }
-            description
           }
         }
       `;
@@ -256,7 +251,6 @@ describe('schema', () => {
               firstName: 'Cornelia',
               lastName: 'Funke'
             },
-            coverImage: null,
             categories: [
               {
                 id: '1',
@@ -266,67 +260,7 @@ describe('schema', () => {
                 id: '2',
                 name: 'Fiction'
               }
-            ],
-            description: null
-          });
-          expect(response.body.singleResult.data?.errors).toBeUndefined();
-        });
-    });
-  });
-
-  describe('addBookByAuthorName', () => {
-    const mutation = `
-        mutation addBookByAuthorName($title: String!, $firstName: String!, $lastName: String!, $coverImage: String, $categoryIds: [ID!]!, $description: String) {
-          addBookByAuthorName(title: $title, firstName: $firstName, lastName: $lastName, coverImage: $coverImage, categoryIds: $categoryIds, description: $description) {
-            id
-            title
-            author {
-              id
-              firstName
-              lastName
-            }
-            coverImage
-            categories {
-              id
-              name
-            }
-            description
-          }
-        }
-      `;
-    it('should add a book', () => {
-      // Add the author first before we add the book
-      return server
-        .executeOperation({
-          query: mutation,
-          variables: {
-            title: 'The Hobbit',
-            firstName: 'Cornelia',
-            lastName: 'Funke',
-            categoryIds: ['1', '2']
-          }
-        })
-        .then(response => {
-          expect(response.body.singleResult.data?.addBookByAuthorName).toEqual({
-            id: '2',
-            title: 'The Hobbit',
-            author: {
-              id: '2',
-              firstName: 'Cornelia',
-              lastName: 'Funke'
-            },
-            coverImage: null,
-            categories: [
-              {
-                id: '1',
-                name: 'Fantasy'
-              },
-              {
-                id: '2',
-                name: 'Fiction'
-              }
-            ],
-            description: null
+            ]
           });
           expect(response.body.singleResult.data?.errors).toBeUndefined();
         });
