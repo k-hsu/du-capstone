@@ -6,7 +6,7 @@ exports[`Footer should render footer component styling 1`] = `
   direction="row"
 >
   <p
-    className="css-10pvad0"
+    className="css-5elzrj"
     color="white"
     fontFamily="IBM Plex Sans"
   >

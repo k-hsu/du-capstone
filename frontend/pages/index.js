@@ -6,27 +6,50 @@ import {
   Button,
   EmptyState,
   Flex,
+  Grid,
   Layout,
   Section,
   Text,
 } from "../components";
 import useToast from "../hooks/useToast";
 import { fontWeight, spacing } from "../theme";
-import { useGetBooks, useAddBookByAuthorName } from "../api/books";
+import { useGetAuthors, useAddAuthor } from "../api/authors";
+import { useGetBooks, useAddBook } from "../api/books";
 
 const Home = () => {
   const [showAddBookModal, setShowAddBookModal] = useState(false);
+  const { authors } = useGetAuthors();
+  const { addAuthor } = useAddAuthor();
   const { books, booksLoading, booksError } = useGetBooks();
-  const { addBook } = useAddBookByAuthorName();
+  const { addBook } = useAddBook();
   const [_, addToast] = useToast();
+
+  const findAuthor = (name) => {
+    const authorIndex = authors
+      .map(({ firstName, lastName }) => `${firstName} ${lastName}`)
+      .findIndex((authorName) => authorName === name);
+    if (authorIndex >= 0) {
+      return authors[authorIndex];
+    }
+    return null;
+  };
+
   const onAddBookModalToggle = () => {
     setShowAddBookModal(!showAddBookModal);
   };
-  const onAddBookModalSubmit = async ({ title, author, description }) => {
+  const onAddBookModalSubmit = async ({
+    title,
+    author: authorName,
+    description,
+  }) => {
     onAddBookModalToggle();
     try {
-      const [firstName, lastName] = author.split(" ");
-      await addBook(title, firstName, lastName, null, [], description);
+      let author = findAuthor(authorName);
+      if (!author) {
+        author = await addAuthor(...authorName.split(" "));
+      }
+      await addBook(title, author.id, null, [], description);
+
       addToast({
         type: "success",
         message: `${title} was added to the library`,
@@ -65,13 +88,17 @@ const Home = () => {
               <Text fontWeight={fontWeight.bold}>+ Add Book</Text>
             </Button>
           </Flex>
-          <Flex width="100%" flexWrap="wrap" gap={spacing["0.75"]}>
+          <Grid
+            width="100%"
+            gap={spacing["0.75"]}
+            gridTemplateColumns="repeat(auto-fill, 276px)"
+          >
             {booksLoading || booksError || !books?.length ? (
               <EmptyState loading={booksLoading} error={booksError} />
             ) : (
               books?.map((book) => <Book key={book.id} {...book} />)
             )}
-          </Flex>
+          </Grid>
         </Section>
       </Layout>
     </>

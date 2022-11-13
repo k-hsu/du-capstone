@@ -6,7 +6,7 @@ exports[`Header should render header component styling 1`] = `
   direction="row"
 >
   <a
-    className="css-5cclr2"
+    className="css-1sofp4k"
     fontFamily="IBM Plex Sans"
     href="/"
   >
@@ -134,7 +134,7 @@ exports[`Header should render header component styling 1`] = `
     </div>
   </a>
   <h1
-    className="css-53e26n"
+    className="css-1sscs80"
     fontFamily="IBM Plex Sans"
   >
     Kobi's Capstone Project

@@ -10,9 +10,7 @@ describe("Authors test", () => {
     const { authors } = useGetAuthors();
     const { author } = useGetAuthor();
     const { addAuthor } = useAddAuthor();
-    addAuthor({
-      variables: {},
-    });
+    addAuthor();
     return authors && author ? <div>test</div> : null;
   };
   it("should use authors hook without error", () => {
@@ -24,7 +22,7 @@ describe("Authors test", () => {
       refetch: () => {},
     });
     useMutation.mockReturnValue([
-      () => {},
+      () => ({ data }),
       { loading: false, error: null, data },
     ]);
     render(<AuthorsTest />);

@@ -4,10 +4,6 @@ import { typography } from "../../theme";
 
 const StyledText = styled.text`
   ${({ fontFamily }) => `font-family: "${fontFamily}";`}
-  ${({ as, lineHeight }) =>
-    as || lineHeight
-      ? `line-height: ${lineHeight ?? typography[as].lineHeight};`
-      : ""}
   ${({ as, fontWeight }) =>
     as || fontWeight
       ? `font-weight: ${fontWeight ?? typography[as].fontWeight};`
@@ -18,6 +14,7 @@ const StyledText = styled.text`
   ${({ color }) => (color ? `color: ${color};` : "")}
   ${({ textDecoration }) =>
     textDecoration ? `text-decoration: ${textDecoration};` : ""}
+  ${({ lineHeight }) => (lineHeight ? `line-height: ${lineHeight};` : "")}
   ${({ cursor }) => (cursor ? `cursor: ${cursor};` : "")}
 `;
 

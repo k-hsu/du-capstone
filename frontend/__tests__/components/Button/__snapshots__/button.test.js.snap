@@ -2,7 +2,7 @@
 
 exports[`Button should render button component styles 1`] = `
 <button
-  className="css-ixr4om"
+  className="css-wkrzoz"
 >
   big red button
 </button>

@@ -58,8 +58,10 @@ export const useAddAuthor = (firstName, lastName) => {
   });
 
   return {
-    addAuthor: (firstName, lastName) =>
-      add({ variables: { firstName, lastName } }),
+    addAuthor: async (firstName, lastName) => {
+      const response = await add({ variables: { firstName, lastName } });
+      return response?.data?.addAuthor;
+    },
     addAuthorLoading: loading,
     addAuthorError: error,
     addAuthorData: data,

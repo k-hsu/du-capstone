@@ -7,7 +7,7 @@ exports[`EmptyState should render empty state component styles of type error 1`]
   width="100%"
 >
   <p
-    className="css-abldy6"
+    className="css-1psrz88"
     fontFamily="IBM Plex Sans"
     fontStyle="italic"
   >
@@ -23,7 +23,7 @@ exports[`EmptyState should render empty state component styles of type loading 1
   width="100%"
 >
   <p
-    className="css-1dyeq18"
+    className="css-1nejjin"
     fontFamily="IBM Plex Sans"
     fontStyle="none"
   >
@@ -39,7 +39,7 @@ exports[`EmptyState should render empty state component styles of type other 1`]
   width="100%"
 >
   <p
-    className="css-abldy6"
+    className="css-1psrz88"
     fontFamily="IBM Plex Sans"
     fontStyle="italic"
   >

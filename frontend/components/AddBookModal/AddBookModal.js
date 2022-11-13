@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Form from "../Form/Form";
 import Input from "../Input/Input";
@@ -6,6 +6,7 @@ import Modal from "../Modal/Modal";
 import TextArea from "../TextArea/TextArea";
 
 const AddBookModal = ({ onClose, onSubmit }) => {
+  const [unloaded, setUnloaded] = useState(true);
   const {
     register,
     handleSubmit,
@@ -40,8 +41,9 @@ const AddBookModal = ({ onClose, onSubmit }) => {
           labelText="Title"
           errorMessage={errors.title?.message}
           ref={(innerRef) => {
-            if (innerRef) {
+            if (unloaded && innerRef) {
               innerRef.focus();
+              setUnloaded(false);
             }
             return ref(innerRef);
           }}
@@ -53,7 +55,7 @@ const AddBookModal = ({ onClose, onSubmit }) => {
           {...register("author", {
             required: "author is required",
             validate: (value) =>
-              value.split(" ").length === 2 ||
+              value.trim().split(" ").length === 2 ||
               "author must have a first name and last name",
           })}
         />

@@ -13,14 +13,14 @@ exports[`Modal Snapshot should render modal component styles 1`] = `
       direction="row"
     >
       <p
-        className="css-kxn7ez"
+        className="css-dtk8j7"
         fontFamily="IBM Plex Sans"
         fontWeight="bold"
       >
         Notification
       </p>
       <p
-        className="css-7ee2u0"
+        className="css-1lkb4ir"
         cursor="pointer"
         fontFamily="IBM Plex Sans"
         tabIndex={0}
@@ -34,7 +34,7 @@ exports[`Modal Snapshot should render modal component styles 1`] = `
       direction="row"
     >
       <p
-        className="css-13kh8s7"
+        className="css-1fd35ut"
         color="#F00"
         cursor="pointer"
         fontFamily="IBM Plex Sans"
@@ -43,10 +43,10 @@ exports[`Modal Snapshot should render modal component styles 1`] = `
         Cancel
       </p>
       <button
-        className="css-ixr4om"
+        className="css-wkrzoz"
       >
         <p
-          className="css-ms6223"
+          className="css-1sofp4k"
           fontFamily="IBM Plex Sans"
         >
           Submit

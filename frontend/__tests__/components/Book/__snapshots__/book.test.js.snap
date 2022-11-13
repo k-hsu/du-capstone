@@ -8,13 +8,13 @@ exports[`Book should render book component styles 1`] = `
   tabIndex={0}
 >
   <h2
-    className="css-c0iozm"
+    className="css-1i5w1wx"
     fontFamily="IBM Plex Sans"
   >
     Harry Potter and the Chamber of Secrets
   </h2>
   <h2
-    className="css-t3u8wj"
+    className="css-y2j9kr"
     fontFamily="IBM Plex Sans"
     fontStyle="italic"
     fontWeight="400"

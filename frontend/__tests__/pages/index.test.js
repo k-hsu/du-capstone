@@ -2,7 +2,8 @@ import React from "react";
 import { render, screen, userEvent, waitFor } from "../../test-utils";
 import Index from "../../pages/index";
 import ToastProvider from "../../providers/ToastProvider/ToastProvider";
-import { useGetBooks, useAddBookByAuthorName } from "../../api/books";
+import { useGetAuthors, useAddAuthor } from "../../api/authors";
+import { useGetBooks, useAddBook } from "../../api/books";
 import AddBookModal from "../../components/AddBookModal/AddBookModal";
 
 jest.mock(
@@ -14,12 +15,16 @@ jest.mock(
 
 jest.mock("../../api/books");
 
+jest.mock("../../api/authors");
+
 jest.mock("../../components/AddBookModal/AddBookModal");
 
 describe("Index page", () => {
   it("should render Index page with no books", () => {
+    useGetAuthors.mockReturnValue({ authors: [] });
     useGetBooks.mockReturnValue({ books: [] });
-    useAddBookByAuthorName.mockReturnValue({ addBook: () => {} });
+    useAddAuthor.mockReturnValue({ addAuthor: () => {} });
+    useAddBook.mockReturnValue({ addBook: () => {} });
     render(<Index />);
 
     expect(screen.getByText("My Library")).toBeInTheDocument();
@@ -27,22 +32,28 @@ describe("Index page", () => {
     expect(screen.getByText("There is nothing here")).toBeInTheDocument();
   });
   it("should render Index page with a book", () => {
+    const authorsData = [
+      { id: "1", firstName: "J.K.", lastName: "Rowling" },
+      { id: "2", firstName: "JK", lastName: "Rowling" },
+    ];
     const booksData = [
       {
         id: "1",
         title: "Harry Potter and the Chamber of Secrets",
-        author: { firstName: "J.K.", lastName: "Rowling" },
+        author: authorsData[0],
         description:
           "Harry Potter and the Chamber of Secrets is a 1998 young adult fantasy novel by J.K. Rowling, the second in the Harry Potter series. The story follows Harry’s tumultuous second year at Hogwarts School of Witchcraft and Wizardry, including an encounter with Voldemort, the wizard who killed Harry’s parents. Against this fantastic backdrop, Rowling examines such themes as death, fame, friendship, choice, and prejudice. Upon release, the novel became a worldwide bestseller and won several awards, including Children’s Book of the Year at the British Book Awards and the Nestlé Smarties Book Award; it was subsequently adapted into a 2002 film directed by Chris Columbus.",
       },
       {
         id: "2",
         title: "Harry Potter and the Prisoner of Azkaban",
-        author: "1",
+        author: authorsData[1],
       },
     ];
+    useGetAuthors.mockReturnValue({ authors: authorsData });
     useGetBooks.mockReturnValue({ books: booksData });
-    useAddBookByAuthorName.mockReturnValue({ addBook: () => {} });
+    useAddAuthor.mockReturnValue({ addAuthor: () => {} });
+    useAddBook.mockReturnValue({ addBook: () => {} });
     render(<Index />);
 
     expect(screen.getByText("My Library")).toBeInTheDocument();
@@ -61,8 +72,10 @@ describe("Index page", () => {
     ).toBeInTheDocument();
   });
   it("should close Add Book Modal if onClose is called", async () => {
+    useGetAuthors.mockReturnValue({ authors: [] });
     useGetBooks.mockReturnValue({ books: [] });
-    useAddBookByAuthorName.mockReturnValue({ addBook: () => {} });
+    useAddAuthor.mockReturnValue({ addAuthor: () => {} });
+    useAddBook.mockReturnValue({ addBook: () => {} });
     AddBookModal.mockImplementation(({ onClose }) => {
       return <button onClick={onClose}>Book Is Being Added</button>;
     });
@@ -75,9 +88,17 @@ describe("Index page", () => {
     expect(screen.queryByText("Book Is Being Added")).toBeNull();
   });
   it("should add book if onSubmit is called", async () => {
+    const authorData = {
+      id: "1",
+      firstName: "Encyclopedia",
+      lastName: "Brown",
+    };
+    const addAuthorMock = jest.fn(() => authorData);
     const addBookMock = jest.fn();
+    useGetAuthors.mockReturnValue({ authors: [] });
     useGetBooks.mockReturnValue({ books: [] });
-    useAddBookByAuthorName.mockReturnValue({ addBook: addBookMock });
+    useAddAuthor.mockReturnValue({ addAuthor: addAuthorMock });
+    useAddBook.mockReturnValue({ addBook: addBookMock });
     const bookInputData = {
       title: "Book",
       author: "Encyclopedia Brown",
@@ -105,10 +126,13 @@ describe("Index page", () => {
     await waitFor(() => screen.findByText("Book was added to the library"), {
       timeout: 3000,
     });
+    expect(addAuthorMock).toBeCalledWith(
+      authorData.firstName,
+      authorData.lastName
+    );
     expect(addBookMock).toBeCalledWith(
       bookInputData.title,
-      bookInputData.author.split(" ")[0],
-      bookInputData.author.split(" ")[1],
+      authorData.id,
       null,
       [],
       bookInputData.description

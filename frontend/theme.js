@@ -30,22 +30,18 @@ export const color = {
 
 export const typography = {
   h1: {
-    lineHeight: spacing["0.5"],
     fontWeight: fontWeight.bold,
     fontSize: spacing["1.75"],
   },
   h2: {
-    lineHeight: spacing["0.5"],
     fontWeight: fontWeight.bold,
     fontSize: spacing["1.5"],
   },
   h3: {
-    lineHeight: spacing["0.5"],
     fontWeight: fontWeight.bold,
     fontSize: spacing["1.25"],
   },
   p: {
-    lineHeight: 0,
     fontWeight: fontWeight.normal,
     fontSize: spacing["1"],
   },

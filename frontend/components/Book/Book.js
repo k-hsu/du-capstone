@@ -23,12 +23,9 @@ const Book = ({ id, author: { firstName, lastName }, title }) => {
   };
   return (
     <StyledBook tabIndex={0} onClick={onBookClick} onKeyDown={onBookClick}>
-      <Text as="h2" lineHeight={0}>
-        {title}
-      </Text>
+      <Text as="h2">{title}</Text>
       <Text
         as="h2"
-        lineHeight={0}
         fontWeight={fontWeight.normal}
         fontStyle="italic"
       >{`${firstName} ${lastName}`}</Text>

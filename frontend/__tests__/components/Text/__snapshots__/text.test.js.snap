@@ -2,7 +2,7 @@
 
 exports[`Text should render default text component styles 1`] = `
 <p
-  className="css-ms6223"
+  className="css-1sofp4k"
   fontFamily="IBM Plex Sans"
 >
   text mex
@@ -11,7 +11,7 @@ exports[`Text should render default text component styles 1`] = `
 
 exports[`Text should render h1 component styles 1`] = `
 <h1
-  className="css-5egnv5"
+  className="css-5toqyq"
   fontFamily="IBM Plex Sans"
 >
   text mex
@@ -20,7 +20,7 @@ exports[`Text should render h1 component styles 1`] = `
 
 exports[`Text should render h2 component styles 1`] = `
 <h2
-  className="css-drfpaa"
+  className="css-1i5w1wx"
   fontFamily="IBM Plex Sans"
 >
   text mex
@@ -29,7 +29,7 @@ exports[`Text should render h2 component styles 1`] = `
 
 exports[`Text should render h3 component styles 1`] = `
 <h3
-  className="css-1n9884d"
+  className="css-1bysshj"
   fontFamily="IBM Plex Sans"
 >
   text mex

@@ -6,11 +6,11 @@ exports[`Breadcrumbs should render breadcrumbs component styles 1`] = `
   direction="row"
 >
   <p
-    className="css-ms6223"
+    className="css-1sofp4k"
     fontFamily="IBM Plex Sans"
   >
     <a
-      className="css-1486csp"
+      className="css-cesnn4"
       color="#000"
       fontFamily="IBM Plex Sans"
       href="/to-the-crumb"
@@ -20,13 +20,13 @@ exports[`Breadcrumbs should render breadcrumbs component styles 1`] = `
     </a>
   </p>
   <p
-    className="css-ms6223"
+    className="css-1sofp4k"
     fontFamily="IBM Plex Sans"
   >
     /
   </p>
   <p
-    className="css-1v2p52x"
+    className="css-16kvdet"
     fontFamily="IBM Plex Sans"
     fontWeight="700"
   >

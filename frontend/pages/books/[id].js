@@ -30,7 +30,6 @@ const BooksDetailPage = () => {
             <Text as="h1">{book.title}</Text>
             <Text
               as="h3"
-              lineHeight={0}
               fontWeight={fontWeight.normal}
             >{`${book.author?.firstName} ${book.author?.lastName}`}</Text>
             {book.description && (

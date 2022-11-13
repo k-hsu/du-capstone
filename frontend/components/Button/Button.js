@@ -6,7 +6,7 @@ const StyledButton = styled.button`
   background-color: ${color.white};
   border: 1px solid ${color.black};
   border-radius: ${spacing["0.25"]};
-  padding: ${spacing["0.75"]} ${spacing["1.25"]};
+  padding: 0 ${spacing["1.25"]};
   cursor: pointer;
 `;
 

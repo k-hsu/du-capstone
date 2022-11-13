@@ -62,7 +62,6 @@ const Modal = ({
                 color={color.red}
                 onClick={onClose}
                 onKeyDown={onClose}
-                lineHeight={0}
                 cursor="pointer"
                 tabIndex={0}
               >
