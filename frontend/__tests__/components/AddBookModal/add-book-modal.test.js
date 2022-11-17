@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, userEvent } from "../../../test-utils";
+import { render, screen, setup } from "../../../test-utils";
 import AddBookModal from "../../../components/AddBookModal/AddBookModal";
 
 describe("Add Book Modal", () => {
@@ -15,36 +15,36 @@ describe("Add Book Modal", () => {
     expect(screen.getByText("Add Book")).toBeInTheDocument();
   });
   it("should call onClose when the cancel button is clicked", async () => {
-    render(
+    const { user } = setup(
       <div id="app-root">
         <AddBookModal onClose={onCloseMock} />
       </div>
     );
     const cancelButton = screen.getByText("Cancel");
     expect(cancelButton).toBeInTheDocument();
-    await userEvent.click(cancelButton);
+    await user.click(cancelButton);
     expect(onCloseMock).toHaveBeenCalledTimes(1);
   });
   it("should call onSubmit when the 'Add Book' button is clicked", async () => {
     const onSubmitMock = jest.fn();
-    render(
+    const { user } = setup(
       <div id="app-root">
         <AddBookModal onSubmit={onSubmitMock} onClose={onCloseMock} />
       </div>
     );
-    await userEvent.type(
+    await user.type(
       screen.getByRole("textbox", { name: "Title" }),
       "Eye of the Tiger"
     );
-    await userEvent.type(
+    await user.type(
       screen.getByRole("textbox", { name: "Author" }),
       "Survivor (band)"
     );
-    await userEvent.type(
+    await user.type(
       screen.getByRole("textbox", { name: "Description" }),
       "The #2 pop song of the year 1982"
     );
-    await userEvent.click(screen.getByText("Add Book"));
+    await user.click(screen.getByText("Add Book"));
     expect(onSubmitMock).toHaveBeenCalledWith({
       author: "Survivor (band)",
       description: "The #2 pop song of the year 1982",

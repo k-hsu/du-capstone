@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, userEvent } from "../../../test-utils";
+import { render, screen, setup } from "../../../test-utils";
 import Modal from "../../../components/Modal/Modal";
 
 describe("Modal", () => {
@@ -21,27 +21,27 @@ describe("Modal", () => {
   });
   it("should call onClose when the close and cancel button is clicked", async () => {
     const onCloseMock = jest.fn();
-    render(
+    const { user } = setup(
       <div id="app-root">
         <Modal title="Notification" onClose={onCloseMock}>
           You have been notified of a friend request
         </Modal>
       </div>
     );
-    await userEvent.click(screen.getByText("X"));
-    await userEvent.click(screen.getByText("Cancel"));
+    await user.click(screen.getByText("X"));
+    await user.click(screen.getByText("Cancel"));
     expect(onCloseMock).toHaveBeenCalledTimes(2);
   });
   it("should call onSubmit when the close button is clicked", async () => {
     const onSubmitMock = jest.fn();
-    render(
+    const { user } = setup(
       <div id="app-root">
         <Modal title="Notification" onSubmit={onSubmitMock}>
           You have been notified of a friend request
         </Modal>
       </div>
     );
-    await userEvent.click(screen.getByText("Submit"));
+    await user.click(screen.getByText("Submit"));
     expect(onSubmitMock).toHaveBeenCalledTimes(1);
   });
 });

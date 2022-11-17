@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, userEvent } from "../../../test-utils";
+import { render, screen, setup } from "../../../test-utils";
 import Button from "../../../components/Button/Button";
 
 describe("Button", () => {
@@ -10,9 +10,11 @@ describe("Button", () => {
 
   it("should call onClick when clicked", async () => {
     const mockOnClick = jest.fn();
-    render(<Button onClick={mockOnClick}>big red button</Button>);
+    const { user } = setup(
+      <Button onClick={mockOnClick}>big red button</Button>
+    );
 
-    await userEvent.click(screen.getByText("big red button"));
+    await user.click(screen.getByText("big red button"));
     expect(mockOnClick).toBeCalledTimes(1);
   });
 });

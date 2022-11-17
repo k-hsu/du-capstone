@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, userEvent, waitFor } from "../../test-utils";
+import { render, screen, setup, waitFor } from "../../test-utils";
 import Index from "../../pages/index";
 import ToastProvider from "../../providers/ToastProvider/ToastProvider";
 import { useGetAuthors, useAddAuthor } from "../../api/authors";
@@ -79,12 +79,12 @@ describe("Index page", () => {
     AddBookModal.mockImplementation(({ onClose }) => {
       return <button onClick={onClose}>Book Is Being Added</button>;
     });
-    render(<Index />);
+    const { user } = setup(<Index />);
 
-    await userEvent.click(screen.getByText("+ Add Book"));
+    await user.click(screen.getByText("+ Add Book"));
     expect(screen.getByText("Book Is Being Added")).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText("Book Is Being Added"));
+    await user.click(screen.getByText("Book Is Being Added"));
     expect(screen.queryByText("Book Is Being Added")).toBeNull();
   });
   it("should add book if onSubmit is called", async () => {
@@ -112,16 +112,16 @@ describe("Index page", () => {
         </button>
       );
     });
-    render(
+    const { user } = setup(
       <ToastProvider>
         <Index />
       </ToastProvider>
     );
 
-    await userEvent.click(screen.getByText("+ Add Book"));
+    await user.click(screen.getByText("+ Add Book"));
     expect(screen.getByText("Book Is Being Added")).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText("Book Is Being Added"));
+    await user.click(screen.getByText("Book Is Being Added"));
     expect(screen.queryByText("Book Is Being Added")).toBeNull();
     await waitFor(() => screen.findByText("Book was added to the library"), {
       timeout: 3000,
