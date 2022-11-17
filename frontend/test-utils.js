@@ -1,5 +1,5 @@
 import userEvent from "@testing-library/user-event";
-import renderer from "react-test-renderer";
+import { renderHook } from "@testing-library/react-hooks";
 
 export * from "@testing-library/react";
-export { userEvent, renderer };
+export { renderHook, userEvent };

@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, renderer } from "../../../test-utils";
+import { render, screen } from "../../../test-utils";
 import Toast from "../../../components/Toast/Toast";
 
 describe("Toast", () => {
@@ -13,19 +13,5 @@ describe("Toast", () => {
     render(<Toast type="success" message="Hello, toast" />);
     expect(screen.getByText("Success!")).toBeInTheDocument();
     expect(screen.getByText("Hello, toast")).toBeInTheDocument();
-  });
-
-  it("should render error toast component styling", () => {
-    const component = renderer.create(<Toast message="Good bye, toast" />);
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("should render success toast component styling", () => {
-    const component = renderer.create(
-      <Toast type="success" message="Hello, toast" />
-    );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
   });
 });

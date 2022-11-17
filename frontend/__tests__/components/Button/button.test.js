@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, renderer } from "../../../test-utils";
+import { render, screen, userEvent } from "../../../test-utils";
 import Button from "../../../components/Button/Button";
 
 describe("Button", () => {
@@ -7,9 +7,12 @@ describe("Button", () => {
     render(<Button>big red button</Button>);
     expect(screen.getByText("big red button")).toBeInTheDocument();
   });
-  it("should render button component styles", () => {
-    const component = renderer.create(<Button>big red button</Button>);
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+
+  it("should call onClick when clicked", async () => {
+    const mockOnClick = jest.fn();
+    render(<Button onClick={mockOnClick}>big red button</Button>);
+
+    await userEvent.click(screen.getByText("big red button"));
+    expect(mockOnClick).toBeCalledTimes(1);
   });
 });

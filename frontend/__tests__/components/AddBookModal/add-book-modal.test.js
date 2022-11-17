@@ -23,25 +23,32 @@ describe("Add Book Modal", () => {
     const cancelButton = screen.getByText("Cancel");
     expect(cancelButton).toBeInTheDocument();
     await userEvent.click(cancelButton);
-    expect(onCloseMock).toBeCalled();
+    expect(onCloseMock).toHaveBeenCalledTimes(1);
   });
-  it("should call onSubmit when the cancel button is clicked", async () => {
+  it("should call onSubmit when the 'Add Book' button is clicked", async () => {
     const onSubmitMock = jest.fn();
     render(
       <div id="app-root">
         <AddBookModal onSubmit={onSubmitMock} onClose={onCloseMock} />
       </div>
     );
-    const submitButton = screen.getByText("Add Book");
-    expect(submitButton).toBeInTheDocument();
-    const titleInput = screen.getAllByRole("textbox")[0];
-    await userEvent.type(titleInput, "Eye of the Tiger");
-    const authorInput = screen.getAllByRole("textbox")[1];
-    await userEvent.type(authorInput, "Survivor (band)");
-    const descriptionInput = screen.getAllByRole("textbox")[2];
-    await userEvent.type(descriptionInput, "The #2 pop song of the year 1982");
-    await userEvent.click(submitButton);
-    expect(onSubmitMock).toBeCalled();
-    expect(onCloseMock).toBeCalled();
+    await userEvent.type(
+      screen.getByRole("textbox", { name: "Title" }),
+      "Eye of the Tiger"
+    );
+    await userEvent.type(
+      screen.getByRole("textbox", { name: "Author" }),
+      "Survivor (band)"
+    );
+    await userEvent.type(
+      screen.getByRole("textbox", { name: "Description" }),
+      "The #2 pop song of the year 1982"
+    );
+    await userEvent.click(screen.getByText("Add Book"));
+    expect(onSubmitMock).toHaveBeenCalledWith({
+      author: "Survivor (band)",
+      description: "The #2 pop song of the year 1982",
+      title: "Eye of the Tiger",
+    });
   });
 });

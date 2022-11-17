@@ -1,7 +1,9 @@
 import React from "react";
-import { render, screen, renderer } from "../../../test-utils";
+import { useRouter } from "next/router";
+import { render, screen, userEvent } from "../../../test-utils";
 import Breadcrumbs from "../../../components/Breadcrumbs/Breadcrumbs";
 
+jest.mock("next/router", () => ({ useRouter: jest.fn() }));
 describe("Breadcrumbs", () => {
   it("should render breadcrumbs component", () => {
     render(
@@ -12,16 +14,18 @@ describe("Breadcrumbs", () => {
     );
     expect(screen.getByText("bread")).toBeInTheDocument();
     expect(screen.getByText("crumb")).toBeInTheDocument();
-    expect(screen.getByText("crumb")).toHaveAttribute("href", "/to-the-crumb");
   });
-  it("should render breadcrumbs component styles", () => {
-    const component = renderer.create(
+  it("should route to url when clicked", async () => {
+    const mockRouterPush = jest.fn();
+    useRouter.mockImplementation(() => ({ push: mockRouterPush }));
+    render(
       <Breadcrumbs
         path={[{ id: "crumb-path", page: "crumb", href: "/to-the-crumb" }]}
         currentPage="bread"
       />
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    await userEvent.click(screen.getByText("crumb"));
+
+    expect(mockRouterPush).toBeCalledWith("/to-the-crumb");
   });
 });

@@ -15,6 +15,7 @@ describe("Modal", () => {
     expect(
       screen.getByText("You have been notified of a friend request")
     ).toBeInTheDocument();
+    expect(screen.getByText("X")).toBeInTheDocument();
     expect(screen.getByText("Cancel")).toBeInTheDocument();
     expect(screen.getByText("Submit")).toBeInTheDocument();
   });
@@ -27,12 +28,8 @@ describe("Modal", () => {
         </Modal>
       </div>
     );
-    const closeButton = screen.getByText("X");
-    expect(closeButton).toBeInTheDocument();
-    const cancelButton = screen.getByText("Cancel");
-    expect(cancelButton).toBeInTheDocument();
-    await userEvent.click(closeButton);
-    await userEvent.click(cancelButton);
+    await userEvent.click(screen.getByText("X"));
+    await userEvent.click(screen.getByText("Cancel"));
     expect(onCloseMock).toHaveBeenCalledTimes(2);
   });
   it("should call onSubmit when the close button is clicked", async () => {
@@ -44,9 +41,7 @@ describe("Modal", () => {
         </Modal>
       </div>
     );
-    const submitButton = screen.getByText("Submit");
-    expect(submitButton).toBeInTheDocument();
-    await userEvent.click(submitButton);
-    expect(onSubmitMock).toBeCalled();
+    await userEvent.click(screen.getByText("Submit"));
+    expect(onSubmitMock).toHaveBeenCalledTimes(1);
   });
 });
