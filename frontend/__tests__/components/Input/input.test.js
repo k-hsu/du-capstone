@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { render, screen, setup } from "../../../test-utils";
+import { render, screen, userEvent } from "../../../test-utils";
 import Input from "../../../components/Input/Input";
 
 describe("Input", () => {
@@ -13,9 +13,9 @@ describe("Input", () => {
     expect(screen.getByRole("textbox", { name: "band" })).toBeInTheDocument();
   });
   it("should show values as typed by user", async () => {
-    const { user } = setup(<RefComponent labelText="band" />);
+    render(<RefComponent labelText="band" />);
 
-    await user.type(
+    await userEvent.type(
       screen.getByRole("textbox", { name: "band" }),
       "Eye of the Tiger"
     );

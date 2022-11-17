@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { render, screen, setup } from "../../../test-utils";
+import { render, screen, userEvent } from "../../../test-utils";
 import TextArea from "../../../components/TextArea/TextArea";
 
 describe("Text Area", () => {
@@ -10,14 +10,12 @@ describe("Text Area", () => {
   it("should render text area component", () => {
     render(<RefComponent labelText="description" />);
     expect(screen.getByText("description")).toBeInTheDocument();
-    expect(
-      screen.getByRole("textbox", { name: "description" })
-    ).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "description" })).toBeInTheDocument();
   });
   it("should show values as typed by user", async () => {
-    const { user } = setup(<RefComponent labelText="description" />);
+    render(<RefComponent labelText="description" />);
 
-    await user.type(
+    await userEvent.type(
       screen.getByRole("textbox", { name: "description" }),
       "The #2 pop song of the year 1982"
     );

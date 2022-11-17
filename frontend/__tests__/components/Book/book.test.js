@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { render, screen, setup } from "../../../test-utils";
+import { render, screen, userEvent } from "../../../test-utils";
 import Book from "../../../components/Book/Book";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
@@ -20,14 +20,14 @@ describe("Book", () => {
   it("should route to url when clicked", async () => {
     const mockRouterPush = jest.fn();
     useRouter.mockImplementation(() => ({ push: mockRouterPush }));
-    const { user } = setup(
+    render(
       <Book
         id="rowling-1"
         title="Harry Potter and the Chamber of Secrets"
         author={{ firstName: "J.K.", lastName: "Rowling" }}
       />
     );
-    await user.click(
+    await userEvent.click(
       screen.getByText("Harry Potter and the Chamber of Secrets")
     );
 

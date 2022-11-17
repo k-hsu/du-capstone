@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { render, screen, setup } from "../../../test-utils";
+import { render, screen, userEvent } from "../../../test-utils";
 import Link from "../../../components/Link/Link";
 
 jest.mock("next/router", () => ({ useRouter: jest.fn() }));
@@ -12,8 +12,8 @@ describe("Link", () => {
   it("should route to url when clicked", async () => {
     const mockRouterPush = jest.fn();
     useRouter.mockImplementation(() => ({ push: mockRouterPush }));
-    const { user } = setup(<Link href="/link">legend of zelda</Link>);
-    await user.click(screen.getByText("legend of zelda"));
+    render(<Link href="/link">legend of zelda</Link>);
+    await userEvent.click(screen.getByText("legend of zelda"));
 
     expect(mockRouterPush).toBeCalledWith("/link");
   });
