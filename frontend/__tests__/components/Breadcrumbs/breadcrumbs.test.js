@@ -15,7 +15,7 @@ describe("Breadcrumbs", () => {
     expect(screen.getByText("bread")).toBeInTheDocument();
     expect(screen.getByText("crumb")).toBeInTheDocument();
   });
-  it("should route to url when clicked", async () => {
+  it("should route to url when clicked", () => {
     const mockRouterPush = jest.fn();
     useRouter.mockImplementation(() => ({ push: mockRouterPush }));
     render(
@@ -24,7 +24,7 @@ describe("Breadcrumbs", () => {
         currentPage="bread"
       />
     );
-    await userEvent.click(screen.getByText("crumb"));
+    userEvent.click(screen.getByText("crumb"));
 
     expect(mockRouterPush).toBeCalledWith("/to-the-crumb");
   });

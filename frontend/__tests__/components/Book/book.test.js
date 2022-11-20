@@ -17,7 +17,7 @@ describe("Book", () => {
     ).toBeInTheDocument();
     expect(screen.getByText("J.K. Rowling")).toBeInTheDocument();
   });
-  it("should route to url when clicked", async () => {
+  it("should route to url when clicked", () => {
     const mockRouterPush = jest.fn();
     useRouter.mockImplementation(() => ({ push: mockRouterPush }));
     render(
@@ -27,7 +27,7 @@ describe("Book", () => {
         author={{ firstName: "J.K.", lastName: "Rowling" }}
       />
     );
-    await userEvent.click(
+    userEvent.click(
       screen.getByText("Harry Potter and the Chamber of Secrets")
     );
 

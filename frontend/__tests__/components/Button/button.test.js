@@ -8,11 +8,11 @@ describe("Button", () => {
     expect(screen.getByText("big red button")).toBeInTheDocument();
   });
 
-  it("should call onClick when clicked", async () => {
+  it("should call onClick when clicked", () => {
     const mockOnClick = jest.fn();
     render(<Button onClick={mockOnClick}>big red button</Button>);
 
-    await userEvent.click(screen.getByText("big red button"));
+    userEvent.click(screen.getByText("big red button"));
     expect(mockOnClick).toBeCalledTimes(1);
   });
 });

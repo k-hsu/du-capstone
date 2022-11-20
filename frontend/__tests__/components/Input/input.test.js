@@ -12,10 +12,10 @@ describe("Input", () => {
     expect(screen.getByText("band")).toBeInTheDocument();
     expect(screen.getByRole("textbox", { name: "band" })).toBeInTheDocument();
   });
-  it("should show values as typed by user", async () => {
+  it("should show values as typed by user", () => {
     render(<RefComponent labelText="band" />);
 
-    await userEvent.type(
+    userEvent.type(
       screen.getByRole("textbox", { name: "band" }),
       "Eye of the Tiger"
     );

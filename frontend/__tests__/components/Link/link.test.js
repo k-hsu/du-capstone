@@ -9,11 +9,11 @@ describe("Link", () => {
     render(<Link href="/">legend of zelda</Link>);
     expect(screen.getByText("legend of zelda")).toBeInTheDocument();
   });
-  it("should route to url when clicked", async () => {
+  it("should route to url when clicked", () => {
     const mockRouterPush = jest.fn();
     useRouter.mockImplementation(() => ({ push: mockRouterPush }));
     render(<Link href="/link">legend of zelda</Link>);
-    await userEvent.click(screen.getByText("legend of zelda"));
+    userEvent.click(screen.getByText("legend of zelda"));
 
     expect(mockRouterPush).toBeCalledWith("/link");
   });

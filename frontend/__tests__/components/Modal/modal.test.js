@@ -19,7 +19,7 @@ describe("Modal", () => {
     expect(screen.getByText("Cancel")).toBeInTheDocument();
     expect(screen.getByText("Submit")).toBeInTheDocument();
   });
-  it("should call onClose when the close and cancel button is clicked", async () => {
+  it("should call onClose when the close and cancel button is clicked", () => {
     const onCloseMock = jest.fn();
     render(
       <div id="app-root">
@@ -28,11 +28,11 @@ describe("Modal", () => {
         </Modal>
       </div>
     );
-    await userEvent.click(screen.getByText("X"));
-    await userEvent.click(screen.getByText("Cancel"));
+    userEvent.click(screen.getByText("X"));
+    userEvent.click(screen.getByText("Cancel"));
     expect(onCloseMock).toHaveBeenCalledTimes(2);
   });
-  it("should call onSubmit when the close button is clicked", async () => {
+  it("should call onSubmit when the close button is clicked", () => {
     const onSubmitMock = jest.fn();
     render(
       <div id="app-root">
@@ -41,7 +41,7 @@ describe("Modal", () => {
         </Modal>
       </div>
     );
-    await userEvent.click(screen.getByText("Submit"));
+    userEvent.click(screen.getByText("Submit"));
     expect(onSubmitMock).toHaveBeenCalledTimes(1);
   });
 });
