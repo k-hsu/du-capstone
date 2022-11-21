@@ -1,4 +1,4 @@
-import { gql, useQuery, useMutation } from "@apollo/client";
+import { gql, useLazyQuery, useQuery, useMutation } from "@apollo/client";
 
 export const useGetAuthors = () => {
   const query = gql`
@@ -10,11 +10,17 @@ export const useGetAuthors = () => {
       }
     }
   `;
-  const { loading, error, data } = useQuery(query);
+  const [refetch, { loading, error, data }] = useLazyQuery(query, {
+    fetchPolicy: "network-only",
+  });
   return {
     authorsLoading: loading,
     authorsError: error,
     authors: data?.getAuthors || [],
+    refetchAuthors: async () => {
+      const response = await refetch();
+      return response?.data?.getAuthors;
+    },
   };
 };
 

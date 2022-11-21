@@ -21,7 +21,7 @@ jest.mock("../../components/AddBookModal/AddBookModal");
 
 describe("Index page", () => {
   it("should render Index page with no books", () => {
-    useGetAuthors.mockReturnValue({ authors: [] });
+    useGetAuthors.mockReturnValue({});
     useGetBooks.mockReturnValue({ books: [] });
     useAddAuthor.mockReturnValue({ addAuthor: () => {} });
     useAddBook.mockReturnValue({ addBook: () => {} });
@@ -71,8 +71,8 @@ describe("Index page", () => {
       )
     ).toBeInTheDocument();
   });
-  it("should close Add Book Modal if onClose is called", async () => {
-    useGetAuthors.mockReturnValue({ authors: [] });
+  it("should close Add Book Modal if onClose is called", () => {
+    useGetAuthors.mockReturnValue({});
     useGetBooks.mockReturnValue({ books: [] });
     useAddAuthor.mockReturnValue({ addAuthor: () => {} });
     useAddBook.mockReturnValue({ addBook: () => {} });
@@ -81,10 +81,10 @@ describe("Index page", () => {
     });
     render(<Index />);
 
-    await userEvent.click(screen.getByText("+ Add Book"));
+    userEvent.click(screen.getByText("+ Add Book"));
     expect(screen.getByText("Book Is Being Added")).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText("Book Is Being Added"));
+    userEvent.click(screen.getByText("Book Is Being Added"));
     expect(screen.queryByText("Book Is Being Added")).toBeNull();
   });
   it("should add book if onSubmit is called", async () => {
@@ -93,9 +93,10 @@ describe("Index page", () => {
       firstName: "Encyclopedia",
       lastName: "Brown",
     };
+    const refetchAuthorsMock = jest.fn(() => null);
     const addAuthorMock = jest.fn(() => authorData);
     const addBookMock = jest.fn();
-    useGetAuthors.mockReturnValue({ authors: [] });
+    useGetAuthors.mockReturnValue({ refetchAuthors: refetchAuthorsMock });
     useGetBooks.mockReturnValue({ books: [] });
     useAddAuthor.mockReturnValue({ addAuthor: addAuthorMock });
     useAddBook.mockReturnValue({ addBook: addBookMock });
@@ -118,14 +119,15 @@ describe("Index page", () => {
       </ToastProvider>
     );
 
-    await userEvent.click(screen.getByText("+ Add Book"));
+    userEvent.click(screen.getByText("+ Add Book"));
     expect(screen.getByText("Book Is Being Added")).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText("Book Is Being Added"));
+    userEvent.click(screen.getByText("Book Is Being Added"));
     expect(screen.queryByText("Book Is Being Added")).toBeNull();
     await waitFor(() => screen.findByText("Book was added to the library"), {
       timeout: 3000,
     });
+    expect(refetchAuthorsMock).toBeCalledTimes(1);
     expect(addAuthorMock).toBeCalledWith(
       authorData.firstName,
       authorData.lastName

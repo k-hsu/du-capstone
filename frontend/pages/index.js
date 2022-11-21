@@ -18,15 +18,16 @@ import { useGetBooks, useAddBook } from "../api/books";
 
 const Home = () => {
   const [showAddBookModal, setShowAddBookModal] = useState(false);
-  const { authors } = useGetAuthors();
+  const { refetchAuthors } = useGetAuthors();
   const { addAuthor } = useAddAuthor();
   const { books, booksLoading, booksError } = useGetBooks();
   const { addBook } = useAddBook();
   const [_, addToast] = useToast();
 
-  const findAuthor = (name) => {
+  const findAuthor = async (name) => {
+    const authors = await refetchAuthors();
     const authorIndex = authors
-      .map(({ firstName, lastName }) => `${firstName} ${lastName}`)
+      ?.map(({ firstName, lastName }) => `${firstName} ${lastName}`)
       .findIndex((authorName) => authorName === name);
     if (authorIndex >= 0) {
       return authors[authorIndex];
@@ -44,7 +45,7 @@ const Home = () => {
   }) => {
     onAddBookModalToggle();
     try {
-      let author = findAuthor(authorName);
+      let author = await findAuthor(authorName);
       if (!author) {
         author = await addAuthor(...authorName.split(" "));
       }

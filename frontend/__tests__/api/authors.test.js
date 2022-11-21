@@ -1,11 +1,11 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { renderHook } from "../../test-utils";
 import { useGetAuthors, useGetAuthor, useAddAuthor } from "../../api/authors";
 
 jest.mock("@apollo/client");
 
 describe("Authors test", () => {
-  it("should call useGetAuthors hook without error", () => {
+  it("should call useGetAuthors hook without error", async () => {
     const getAuthors = [
       {
         id: "1",
@@ -13,17 +13,20 @@ describe("Authors test", () => {
         lastName: "Rowling",
       },
     ];
-    useQuery.mockReturnValue({
-      loading: false,
-      error: null,
-      data: { getAuthors },
-    });
+    const refetchMock = jest.fn(() => ({ data: { getAuthors } }));
+    useLazyQuery.mockReturnValue([
+      refetchMock,
+      { loading: false, error: null, data: { getAuthors } },
+    ]);
 
     const { result } = renderHook(() => useGetAuthors());
 
     expect(result.current.authorsLoading).toBe(false);
     expect(result.current.authorsError).toBe(null);
     expect(result.current.authors).toEqual(getAuthors);
+    const response = await result.current.refetchAuthors();
+    expect(response).toEqual(getAuthors);
+    expect(refetchMock).toBeCalledWith();
   });
   it("should call useGetAuthor hook without error", () => {
     const getAuthor = {
