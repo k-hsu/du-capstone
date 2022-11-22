@@ -1,0 +1,7 @@
+FROM node:16-alpine
+ENV APP_HOME /usr/src/app
+WORKDIR $APP_HOME
+COPY ./api .
+RUN npm install
+RUN npm run build
+CMD ["npm", "start"]

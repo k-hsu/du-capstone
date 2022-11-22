@@ -16,4 +16,17 @@ To get started, cd into either the frontend or api directory, run `npm i`, then 
 
 For more details, check out the READMEs inside the api and frontend directories.
 
+## Deployment
+
+Build docker images
+<pre>
+docker build -t du-capstone/frontend -f Dockerfile.frontend .
+docker build -t du-capstone/backend -f Dockerfile.backend .
+</pre>
+
+Run with configured settings
+<pre>
+docker-compose up
+</pre>
+
 _Talk is cheap, #ShowMeTheCode_
