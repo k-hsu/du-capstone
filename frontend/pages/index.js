@@ -13,44 +13,20 @@ import {
 } from "../components";
 import useToast from "../hooks/useToast";
 import { fontWeight, spacing } from "../theme";
-import { useGetAuthors, useAddAuthor } from "../api/authors";
 import { useGetBooks, useAddBook } from "../api/books";
 
 const Home = () => {
   const [showAddBookModal, setShowAddBookModal] = useState(false);
-  const { refetchAuthors } = useGetAuthors();
-  const { addAuthor } = useAddAuthor();
   const { books, booksLoading, booksError } = useGetBooks();
   const { addBook } = useAddBook();
   const [_, addToast] = useToast();
-
-  const findAuthor = async (name) => {
-    const authors = await refetchAuthors();
-    const authorIndex = authors
-      ?.map(({ firstName, lastName }) => `${firstName} ${lastName}`)
-      .findIndex((authorName) => authorName === name);
-    if (authorIndex >= 0) {
-      return authors[authorIndex];
-    }
-    return null;
-  };
-
   const onAddBookModalToggle = () => {
     setShowAddBookModal(!showAddBookModal);
   };
-  const onAddBookModalSubmit = async ({
-    title,
-    author: authorName,
-    description,
-  }) => {
-    onAddBookModalToggle();
+  const onAddBookModalSubmit = async ({ title, author, description }) => {
     try {
-      let author = await findAuthor(authorName);
-      if (!author) {
-        author = await addAuthor(...authorName.split(" "));
-      }
-      await addBook(title, author.id, null, [], description);
-
+      await addBook(title, author, null, [], description);
+      onAddBookModalToggle();
       addToast({
         type: "success",
         message: `${title} was added to the library`,

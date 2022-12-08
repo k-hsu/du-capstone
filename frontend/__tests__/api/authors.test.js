@@ -1,72 +1,147 @@
-import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
-import { renderHook } from "../../test-utils";
-import { useGetAuthors, useGetAuthor, useAddAuthor } from "../../api/authors";
-
-jest.mock("@apollo/client");
+import React from "react";
+import { MockedProvider } from "@apollo/client/testing";
+import { renderHook, waitFor } from "../../test-utils";
+import {
+  useGetAuthors,
+  useGetAuthor,
+  useAddAuthor,
+  ADD_AUTHOR_GQL,
+  GET_AUTHOR_GQL,
+  GET_AUTHORS_GQL,
+} from "../../api/authors";
 
 describe("Authors test", () => {
+  const mocks = [
+    {
+      request: {
+        query: GET_AUTHORS_GQL,
+        variables: {},
+      },
+      result: {
+        data: {
+          getAuthors: [
+            {
+              id: "1",
+              firstName: "J.K.",
+              lastName: "Rowling",
+            },
+          ],
+        },
+      },
+    },
+    {
+      request: {
+        query: GET_AUTHOR_GQL,
+        variables: {
+          id: "1",
+        },
+      },
+      result: {
+        data: {
+          getAuthor: {
+            id: "1",
+            firstName: "J.K.",
+            lastName: "Rowling",
+          },
+        },
+      },
+    },
+    {
+      request: {
+        query: ADD_AUTHOR_GQL,
+        variables: {
+          firstName: "J.K.",
+          lastName: "Rowling",
+        },
+      },
+      result: {
+        data: {
+          addAuthor: {
+            id: "1",
+            firstName: "J.K.",
+            lastName: "Rowling",
+          },
+        },
+      },
+    },
+    {
+      request: {
+        query: ADD_AUTHOR_GQL,
+        variables: {
+          firstName: "Suzanne",
+          lastName: "Collins",
+        },
+      },
+      result: {
+        data: {
+          addAuthor: {
+            id: "2",
+            firstName: "Suzanne",
+            lastName: "Collins",
+          },
+        },
+      },
+    },
+  ];
   it("should call useGetAuthors hook without error", async () => {
-    const getAuthors = [
+    const { result } = renderHook(() => useGetAuthors(), {
+      wrapper: ({ children }) => (
+        <MockedProvider mocks={mocks}>{children}</MockedProvider>
+      ),
+    });
+
+    await waitFor(() => expect(result.current.authorsLoading).toBe(false), {
+      timeout: 3000,
+    });
+    expect(result.current.authorsLoading).toBe(false);
+    expect(result.current.authorsError).toBe(undefined);
+    expect(result.current.getAuthors()).toEqual([]);
+
+    await result.current.refetchAuthors();
+    expect(result.current.getAuthors()).toEqual([
       {
         id: "1",
         firstName: "J.K.",
         lastName: "Rowling",
       },
-    ];
-    const refetchMock = jest.fn(() => ({ data: { getAuthors } }));
-    useLazyQuery.mockReturnValue([
-      refetchMock,
-      { loading: false, error: null, data: { getAuthors } },
     ]);
-
-    const { result } = renderHook(() => useGetAuthors());
-
-    expect(result.current.authorsLoading).toBe(false);
-    expect(result.current.authorsError).toBe(null);
-    expect(result.current.authors).toEqual(getAuthors);
-    const response = await result.current.refetchAuthors();
-    expect(response).toEqual(getAuthors);
-    expect(refetchMock).toBeCalledWith();
   });
-  it("should call useGetAuthor hook without error", () => {
-    const getAuthor = {
+  it("should call useGetAuthor hook without error", async () => {
+    const { result } = renderHook(() => useGetAuthor("1"), {
+      wrapper: ({ children }) => (
+        <MockedProvider mocks={mocks}>{children}</MockedProvider>
+      ),
+    });
+    await waitFor(() => expect(result.current.authorLoading).toBe(false), {
+      timeout: 3000,
+    });
+    expect(result.current.authorLoading).toBe(false);
+    expect(result.current.authorError).toBe(undefined);
+    expect(result.current.author).toEqual({
       id: "1",
       firstName: "J.K.",
       lastName: "Rowling",
-    };
-    useQuery.mockReturnValue({
-      loading: false,
-      error: null,
-      data: { getAuthor },
     });
-
-    const { result } = renderHook(() => useGetAuthor("1"));
-
-    expect(result.current.authorLoading).toBe(false);
-    expect(result.current.authorError).toBe(null);
-    expect(result.current.author).toEqual(getAuthor);
   });
   it("should call useAddAuthor hook without error", async () => {
-    const addAuthor = {
+    const { result } = renderHook(() => useAddAuthor("J.K.", "Rowling"), {
+      wrapper: ({ children }) => (
+        <MockedProvider mocks={mocks}>{children}</MockedProvider>
+      ),
+    });
+    await result.current.addAuthor("J.K.", "Rowling");
+    expect(result.current.addAuthorLoading).toBe(false);
+    expect(result.current.addAuthorError).toBe(undefined);
+    expect(result.current.getAddAuthorData()).toEqual({
       id: "1",
       firstName: "J.K.",
       lastName: "Rowling",
-    };
-    const addAuthorMock = jest.fn(() => ({ data: { addAuthor } }));
-    useMutation.mockReturnValue([
-      addAuthorMock,
-      { loading: false, error: null, data: { addAuthor } },
-    ]);
-
-    const { result } = renderHook(() => useAddAuthor("1"));
-
-    expect(result.current.addAuthorLoading).toBe(false);
-    expect(result.current.addAuthorError).toBe(null);
-    expect(result.current.addAuthorData).toEqual({ addAuthor });
-    const response = await result.current.addAuthor("J.K.", "Rowling");
-    expect(response).toEqual(addAuthor);
-    expect(addAuthorMock).toBeCalledWith({
-      variables: { firstName: "J.K.", lastName: "Rowling" },
+    });
+    await result.current.addAuthor("Suzanne", "Collins");
+    expect(result.current.getAddAuthorData()).toEqual({
+      id: "2",
+      firstName: "Suzanne",
+      lastName: "Collins",
     });
   });
 });
