@@ -1,22 +1,23 @@
-import { gql, useQuery, useMutation } from "@apollo/client";
+import { gql, useQuery, useMutation, makeVar } from "@apollo/client";
+import { useGetAuthors, useAddAuthor } from "../api/authors";
 
-export const useGetBooks = () => {
-  const query = gql`
-    query getBooks {
-      getBooks {
+export const GET_BOOKS_GQL = gql`
+  query getBooks {
+    getBooks {
+      id
+      title
+      coverImage
+      author {
         id
-        title
-        coverImage
-        author {
-          id
-          firstName
-          lastName
-        }
+        firstName
+        lastName
       }
     }
-  `;
+  }
+`;
 
-  const { loading, error, data } = useQuery(query);
+export const useGetBooks = () => {
+  const { loading, error, data } = useQuery(GET_BOOKS_GQL);
 
   return {
     booksLoading: loading,
@@ -25,24 +26,26 @@ export const useGetBooks = () => {
   };
 };
 
-export const useGetBook = (id) => {
-  const query = gql`
-    query getBook($id: ID!) {
-      getBook(id: $id) {
+export const GET_BOOK_GQL = gql`
+  query getBook($id: ID!) {
+    getBook(id: $id) {
+      id
+      title
+      coverImage
+      author {
         id
-        title
-        coverImage
-        author {
-          id
-          firstName
-          lastName
-        }
-        description
+        firstName
+        lastName
       }
+      description
     }
-  `;
+  }
+`;
 
-  const { loading, error, data } = useQuery(query, { variables: { id } });
+export const useGetBook = (id) => {
+  const { loading, error, data } = useQuery(GET_BOOK_GQL, {
+    variables: { id },
+  });
 
   return {
     bookLoading: loading,
@@ -51,6 +54,38 @@ export const useGetBook = (id) => {
   };
 };
 
+export const ADD_BOOK_GQL = gql`
+  mutation addBook(
+    $title: String!
+    $authorId: String!
+    $coverImage: String
+    $categoryIds: [String!]!
+    $description: String
+  ) {
+    addBook(
+      title: $title
+      authorId: $authorId
+      coverImage: $coverImage
+      categoryIds: $categoryIds
+      description: $description
+    ) {
+      id
+      title
+      author {
+        id
+        firstName
+        lastName
+      }
+      coverImage
+      categories {
+        id
+        name
+      }
+      description
+    }
+  }
+`;
+
 export const useAddBook = (
   title,
   authorId,
@@ -58,61 +93,65 @@ export const useAddBook = (
   categoryIds,
   description
 ) => {
-  const mutation = gql`
-    mutation addBook(
-      $title: String!
-      $authorId: String!
-      $coverImage: String
-      $categoryIds: [String!]!
-      $description: String
-    ) {
-      addBook(
-        title: $title
-        authorId: $authorId
-        coverImage: $coverImage
-        categoryIds: $categoryIds
-        description: $description
-      ) {
-        id
-        title
-        coverImage
-        author {
-          id
-          firstName
-          lastName
-        }
-        description
-      }
-    }
-  `;
-  const [add, { loading, error, data }] = useMutation(mutation, {
+  const [add, { loading, error, data }] = useMutation(ADD_BOOK_GQL, {
     variables: { title, authorId, coverImage, categoryIds, description },
+    refetchQueries: () => [{ query: GET_BOOKS_GQL }],
   });
+  const getAddBookData = makeVar(data?.addBook);
+
+  const { getAuthors, refetchAuthors } = useGetAuthors();
+  const { addAuthor, getAddAuthorData } = useAddAuthor();
+
+  const findAuthor = async (name) => {
+    await refetchAuthors();
+    return getAuthors()?.find(
+      ({ firstName, lastName }) => `${firstName} ${lastName}` === name
+    );
+  };
+
+  const createAuthor = async (firstName, lastName) => {
+    await addAuthor(firstName, lastName);
+    return getAddAuthorData();
+  };
+
   return {
-    addBook: (title, authorId, coverImage, categoryIds, description) =>
-      add({
+    addBook: async (
+      title,
+      authorName,
+      coverImage,
+      categoryIds,
+      description
+    ) => {
+      let author = await findAuthor(authorName);
+      if (!author) {
+        author = await createAuthor(...authorName.split(" "));
+      }
+
+      const response = await add({
         variables: {
           title,
-          authorId,
+          authorId: author.id,
           coverImage,
           categoryIds,
           description,
         },
-      }),
+      });
+      getAddBookData(response?.data?.addBook);
+    },
     addBookLoading: loading,
     addBookError: error,
-    addBookData: data,
+    getAddBookData,
   };
 };
 
-export const useRemoveBook = () => {
-  const mutation = gql`
-    mutation removeBook($id: ID!) {
-      removeBook(id: $id)
-    }
-  `;
+export const REMOVE_BOOK_GQL = gql`
+  mutation removeBook($id: ID!) {
+    removeBook(id: $id)
+  }
+`;
 
-  const [removeBook, { loading, error, data }] = useMutation(mutation);
+export const useRemoveBook = () => {
+  const [removeBook, { loading, error, data }] = useMutation(REMOVE_BOOK_GQL);
 
   return {
     removeBook,

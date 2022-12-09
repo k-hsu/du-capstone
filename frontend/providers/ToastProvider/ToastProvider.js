@@ -1,5 +1,4 @@
-import React, { useMemo, useState, createContext } from "react";
-import ToastManager from "../../components/ToastManager";
+import React, { useMemo, useState } from "react";
 import ToastContext from "../contexts/ToastContext";
 
 const ToastProvider = ({ children }) => {
@@ -7,10 +6,7 @@ const ToastProvider = ({ children }) => {
   const value = useMemo(() => ({ toasts, setToasts }), [toasts]);
 
   return (
-    <ToastContext.Provider value={value}>
-      {children}
-      <ToastManager />
-    </ToastContext.Provider>
+    <ToastContext.Provider value={value}>{children}</ToastContext.Provider>
   );
 };
 
