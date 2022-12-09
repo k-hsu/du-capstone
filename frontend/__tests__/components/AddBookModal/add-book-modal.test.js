@@ -31,11 +31,6 @@ describe("Add Book Modal", () => {
     );
     render(<AddBookModal onSubmit={onSubmitMock} onClose={onCloseMock} />);
   });
-  it("should render add book modal component", () => {
-    expect(screen.getByText("Add New Book")).toBeInTheDocument();
-    expect(screen.getByText("Cancel")).toBeInTheDocument();
-    expect(screen.getByText("Add Book")).toBeInTheDocument();
-  });
   it("should call onClose when the cancel button is clicked", () => {
     const cancelButton = screen.getByText("Cancel");
     expect(cancelButton).toBeInTheDocument();

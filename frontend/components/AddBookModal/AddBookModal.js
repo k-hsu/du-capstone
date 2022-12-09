@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import Form from "../Form/Form";
 import Input from "../Input/Input";
@@ -6,7 +6,6 @@ import Modal from "../Modal/Modal";
 import TextArea from "../TextArea/TextArea";
 
 const AddBookModal = ({ onClose, onSubmit }) => {
-  const [unloaded, setUnloaded] = useState(true);
   const {
     register,
     handleSubmit,
@@ -16,10 +15,6 @@ const AddBookModal = ({ onClose, onSubmit }) => {
   const onSubmitForm = (results) => {
     onSubmit(results);
   };
-
-  const { ref, ...titleRegister } = register("title", {
-    required: "title is required",
-  });
 
   return (
     <Modal
@@ -40,14 +35,10 @@ const AddBookModal = ({ onClose, onSubmit }) => {
         <Input
           labelText="Title"
           errorMessage={errors.title?.message}
-          ref={(innerRef) => {
-            if (unloaded && innerRef) {
-              innerRef.focus();
-              setUnloaded(false);
-            }
-            return ref(innerRef);
-          }}
-          {...titleRegister}
+          autoFocus
+          {...register("title", {
+            required: "title is required",
+          })}
         />
         <Input
           labelText="Author"

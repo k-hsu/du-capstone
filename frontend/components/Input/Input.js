@@ -14,15 +14,17 @@ const StyledInput = styled.input`
   font-family: "IBM Plex Sans", sans-serif;
 `;
 
-const Input = forwardRef(({ id, labelText, errorMessage, ...props }, ref) => {
-  return (
-    <StyledLabel htmlFor={id}>
-      <Text fontWeight={fontWeight.bold}>{labelText}</Text>
-      <StyledInput id={id} ref={ref} {...props} />
-      {errorMessage && <Text color={color.red}>{errorMessage}</Text>}
-    </StyledLabel>
-  );
-});
+const Input = forwardRef(
+  ({ id, labelText, errorMessage, autoFocus, ...props }, ref) => {
+    return (
+      <StyledLabel htmlFor={id}>
+        <Text fontWeight={fontWeight.bold}>{labelText}</Text>
+        <StyledInput id={id} ref={ref} autoFocus={autoFocus} {...props} />
+        {errorMessage && <Text color={color.red}>{errorMessage}</Text>}
+      </StyledLabel>
+    );
+  }
+);
 Input.displayName = "Input";
 
 export default Input;
