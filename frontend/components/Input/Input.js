@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import Text from "../Text/Text";
 import { color, fontWeight, spacing } from "../../theme";
 
-const StyledLabel = styled.label`
+const StyledWrapper = styled.label`
   display: flex;
   flex-direction: column;
 `;
@@ -17,11 +17,11 @@ const StyledInput = styled.input`
 const Input = forwardRef(
   ({ id, labelText, errorMessage, autoFocus, ...props }, ref) => {
     return (
-      <StyledLabel htmlFor={id}>
+      <StyledWrapper htmlFor={id}>
         <Text fontWeight={fontWeight.bold}>{labelText}</Text>
         <StyledInput id={id} ref={ref} autoFocus={autoFocus} {...props} />
         {errorMessage && <Text color={color.red}>{errorMessage}</Text>}
-      </StyledLabel>
+      </StyledWrapper>
     );
   }
 );
