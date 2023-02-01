@@ -3,8 +3,15 @@ module.exports = {
   verbose: false,
   testMatch: ["**/__tests__/**/*.test.[jt]s?(x)"],
   moduleNameMapper: {
-    "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
   },
+  coveragePathIgnorePatterns: [
+    "<rootDir>/node_modules/",
+    "<rootDir>/providers/",
+    "<rootDir>/hooks/",
+    "<rootDir>/components/Toast/",
+    "<rootDir>/components/ToastManager/",
+  ],
   coverageThreshold: {
     global: {
       branches: 0,
@@ -13,5 +20,5 @@ module.exports = {
       statements: 0,
     },
   },
-  setupFilesAfterEnv: ['<rootDir>/jest-setup.js']
+  setupFilesAfterEnv: ["<rootDir>/jest-setup.js"],
 };
