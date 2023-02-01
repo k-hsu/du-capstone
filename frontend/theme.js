@@ -52,8 +52,6 @@ export const typography = {
 };
 
 export const globalStyles = `
-  @import url(https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap);
-
   #__next,
   #__next > div {
     display: flex;

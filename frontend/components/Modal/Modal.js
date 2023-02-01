@@ -30,52 +30,44 @@ const Modal = ({
   cancelText = "Cancel",
   submitText = "Submit",
 }) => {
-  const [appRoot, setAppRoot] = useState(null);
-  useLayoutEffect(() => {
-    if (appRoot !== document?.getElementById("app-root")) {
-      setAppRoot(document.getElementById("app-root"));
-    }
-  }, [appRoot]);
-  return appRoot
-    ? createPortal(
-        <StyledModalBackground onClick={onClose}>
-          <StyledModal onClick={(event) => event.stopPropagation()}>
-            <Flex justifyContent="space-between" p={`0 0 ${spacing["2"]} 0`}>
-              <Text fontWeight="bold">{title}</Text>
-              <Text
-                onClick={onClose}
-                onKeyDown={onClose}
-                cursor="pointer"
-                tabIndex={0}
-              >
-                X
-              </Text>
-            </Flex>
-            {children}
-            <Flex
-              justifyContent="flex-end"
-              alignItems="center"
-              gap={spacing["1.5"]}
-              p={`${spacing["2"]} 0 0 0`}
-            >
-              <Text
-                color={color.red}
-                onClick={onClose}
-                onKeyDown={onClose}
-                cursor="pointer"
-                tabIndex={0}
-              >
-                {cancelText}
-              </Text>
-              <Button onClick={onSubmit}>
-                <Text>{submitText}</Text>
-              </Button>
-            </Flex>
-          </StyledModal>
-        </StyledModalBackground>,
-        appRoot
-      )
-    : null;
+  return createPortal(
+    <StyledModalBackground onClick={onClose}>
+      <StyledModal onClick={(event) => event.stopPropagation()}>
+        <Flex justifyContent="space-between" p={`0 0 ${spacing["2"]} 0`}>
+          <Text fontWeight="bold">{title}</Text>
+          <Text
+            onClick={onClose}
+            onKeyDown={onClose}
+            cursor="pointer"
+            tabIndex={0}
+          >
+            X
+          </Text>
+        </Flex>
+        {children}
+        <Flex
+          justifyContent="flex-end"
+          alignItems="center"
+          gap={spacing["1.5"]}
+          p={`${spacing["2"]} 0 0 0`}
+        >
+          <Text
+            color={color.red}
+            onClick={onClose}
+            onKeyDown={onClose}
+            cursor="pointer"
+            tabIndex={0}
+          >
+            {cancelText}
+          </Text>
+          <Button onClick={onSubmit}>
+            <Text>{submitText}</Text>
+          </Button>
+        </Flex>
+      </StyledModal>
+    </StyledModalBackground>,
+    document.getElementById("app-root")
+  );
 };
 
 export default Modal;

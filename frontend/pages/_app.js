@@ -22,13 +22,13 @@ const App = ({ Component, pageProps }) => {
           ${globalStyles}
         `}
       />
-      <ApolloProvider client={client}>
-        <div id="app-root">
+      <div id="app-root">
+        <ApolloProvider client={client}>
           <ToastProvider>
             <Component {...pageProps} />
           </ToastProvider>
-        </div>
-      </ApolloProvider>
+        </ApolloProvider>
+      </div>
     </>
   );
 };

@@ -17,14 +17,14 @@ const EmptyStateElement = ({ type = "loading" }) => {
   );
 };
 
-const EmptyState = ({ loading, error }) => {
-  return loading ? (
-    <EmptyStateElement type="loading" />
-  ) : error ? (
-    <EmptyStateElement type="error" />
-  ) : (
-    <EmptyStateElement type="other" />
-  );
+const EmptyState = ({ loading, error, empty, children }) => {
+  if (loading) {
+    return <EmptyStateElement type="loading" />;
+  }
+  if (error) {
+    return <EmptyStateElement type="error" />;
+  }
+  return empty ? <EmptyStateElement type="other" /> : children;
 };
 
 export default EmptyState;

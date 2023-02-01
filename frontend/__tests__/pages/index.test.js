@@ -23,7 +23,6 @@ describe("Index page", () => {
     render(<Index />);
 
     expect(screen.getByText("My Library")).toBeInTheDocument();
-    expect(screen.getByText("DU Capstone")).toBeInTheDocument();
     expect(screen.getByText("There is nothing here")).toBeInTheDocument();
   });
   it("should render Index page with a book", () => {
@@ -47,7 +46,6 @@ describe("Index page", () => {
     render(<Index />);
 
     expect(screen.getByText("My Library")).toBeInTheDocument();
-    expect(screen.getByText("DU Capstone")).toBeInTheDocument();
     expect(
       screen.getByText("Harry Potter and the Chamber of Secrets")
     ).toBeInTheDocument();

@@ -3,13 +3,14 @@ import { render, screen, userEvent } from "../../../test-utils";
 import Modal from "../../../components/Modal/Modal";
 
 describe("Modal", () => {
+  const div = document.createElement("div");
+  div.id = "app-root";
   it("should render modal component", () => {
     render(
-      <div id="app-root">
-        <Modal title="Notification">
-          You have been notified of a friend request
-        </Modal>
-      </div>
+      <Modal title="Notification">
+        You have been notified of a friend request
+      </Modal>,
+      { container: document.body.appendChild(div) }
     );
     expect(screen.getByText("Notification")).toBeInTheDocument();
     expect(
@@ -26,7 +27,8 @@ describe("Modal", () => {
         <Modal title="Notification" onClose={onCloseMock}>
           You have been notified of a friend request
         </Modal>
-      </div>
+      </div>,
+      { container: document.body.appendChild(div) }
     );
     userEvent.click(screen.getByText("X"));
     userEvent.click(screen.getByText("Cancel"));
@@ -39,7 +41,8 @@ describe("Modal", () => {
         <Modal title="Notification" onSubmit={onSubmitMock}>
           You have been notified of a friend request
         </Modal>
-      </div>
+      </div>,
+      { container: document.body.appendChild(div) }
     );
     userEvent.click(screen.getByText("Submit"));
     expect(onSubmitMock).toHaveBeenCalledTimes(1);

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Head from "next/head";
+import React, { useEffect, useState, useRef } from "react";
 import {
   AddBookModal,
   Book,
@@ -20,13 +19,13 @@ const Home = () => {
   const { books, booksLoading, booksError } = useGetBooks();
   const { addBook } = useAddBook();
   const [_, addToast] = useToast();
-  const onAddBookModalToggle = () => {
-    setShowAddBookModal(!showAddBookModal);
+  const onAddBookModalToggle = (state) => {
+    setShowAddBookModal(state);
   };
   const onAddBookModalSubmit = async ({ title, author, description }) => {
     try {
       await addBook(title, author, null, [], description);
-      onAddBookModalToggle();
+      onAddBookModalToggle(false);
       addToast({
         type: "success",
         message: `${title} was added to the library`,
@@ -38,17 +37,9 @@ const Home = () => {
 
   return (
     <>
-      <Head>
-        <title>DU Capstone</title>
-        <meta
-          name="description"
-          content="Capstone project for Digital University Dev Team"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       {showAddBookModal && (
         <AddBookModal
-          onClose={onAddBookModalToggle}
+          onClose={() => onAddBookModalToggle(false)}
           onSubmit={onAddBookModalSubmit}
         />
       )}
@@ -61,7 +52,7 @@ const Home = () => {
             width="100%"
           >
             <Text as="h3">My Library</Text>
-            <Button onClick={onAddBookModalToggle}>
+            <Button onClick={() => onAddBookModalToggle(true)}>
               <Text fontWeight={fontWeight.bold}>+ Add Book</Text>
             </Button>
           </Flex>
@@ -70,11 +61,15 @@ const Home = () => {
             gap={spacing["0.75"]}
             gridTemplateColumns="repeat(auto-fill, 276px)"
           >
-            {booksLoading || booksError || !books?.length ? (
-              <EmptyState loading={booksLoading} error={booksError} />
-            ) : (
-              books?.map((book) => <Book key={book.id} {...book} />)
-            )}
+            <EmptyState
+              loading={booksLoading}
+              error={booksError}
+              empty={books.length === 0}
+            >
+              {books?.map((book) => (
+                <Book key={book.id} {...book} />
+              ))}
+            </EmptyState>
           </Grid>
         </Section>
       </Layout>
