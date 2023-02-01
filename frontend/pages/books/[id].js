@@ -16,12 +16,8 @@ const BooksDetailPage = () => {
   const { book, bookLoading, bookError } = useGetBook(router.query.id);
   return (
     <Layout>
-      {bookLoading || bookError || !Object.keys(book).length ? (
-        <Section>
-          <EmptyState loading={bookLoading} error={bookError} />
-        </Section>
-      ) : (
-        <Section>
+      <Section>
+        <EmptyState loading={bookLoading} error={bookError} empty={!book}>
           <Breadcrumbs
             path={[{ id: "index", page: "Books", href: "/" }]}
             currentPage={book.title}
@@ -39,8 +35,8 @@ const BooksDetailPage = () => {
             )}
             {book.description && <Text>{book.description}</Text>}
           </Flex>
-        </Section>
-      )}
+        </EmptyState>
+      </Section>
     </Layout>
   );
 };
