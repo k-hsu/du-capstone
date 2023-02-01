@@ -1,6 +1,6 @@
 import React from "react";
 import { MockedProvider } from "@apollo/client/testing";
-import { renderHook, waitFor } from "../../test-utils";
+import { renderHook, waitFor, act } from "../../test-utils";
 import {
   useGetAuthors,
   useGetAuthor,
@@ -42,6 +42,7 @@ describe("Authors test", () => {
             id: "1",
             firstName: "J.K.",
             lastName: "Rowling",
+            books: [],
           },
         },
       },
@@ -97,7 +98,7 @@ describe("Authors test", () => {
     expect(result.current.authorsError).toBe(undefined);
     expect(result.current.getAuthors()).toEqual([]);
 
-    await result.current.refetchAuthors();
+    await act(async () => await result.current.refetchAuthors());
     expect(result.current.getAuthors()).toEqual([
       {
         id: "1",
@@ -121,6 +122,7 @@ describe("Authors test", () => {
       id: "1",
       firstName: "J.K.",
       lastName: "Rowling",
+      books: [],
     });
   });
   it("should call useAddAuthor hook without error", async () => {
@@ -129,7 +131,7 @@ describe("Authors test", () => {
         <MockedProvider mocks={mocks}>{children}</MockedProvider>
       ),
     });
-    await result.current.addAuthor("J.K.", "Rowling");
+    await act(async () => await result.current.addAuthor("J.K.", "Rowling"));
     expect(result.current.addAuthorLoading).toBe(false);
     expect(result.current.addAuthorError).toBe(undefined);
     expect(result.current.getAddAuthorData()).toEqual({
@@ -137,7 +139,7 @@ describe("Authors test", () => {
       firstName: "J.K.",
       lastName: "Rowling",
     });
-    await result.current.addAuthor("Suzanne", "Collins");
+    await act(async () => await result.current.addAuthor("Suzanne", "Collins"));
     expect(result.current.getAddAuthorData()).toEqual({
       id: "2",
       firstName: "Suzanne",

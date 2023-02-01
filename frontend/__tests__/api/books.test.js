@@ -1,5 +1,5 @@
 import React from "react";
-import { renderHook, waitFor } from "../../test-utils";
+import { renderHook, waitFor, act } from "../../test-utils";
 import { GET_AUTHORS_GQL, ADD_AUTHOR_GQL } from "../../api/authors";
 import {
   useGetBooks,
@@ -60,6 +60,7 @@ describe("Books test", () => {
                 firstName: "J.K.",
                 lastName: "Rowling",
               },
+              coverImage: null,
             },
           ],
         },
@@ -82,6 +83,8 @@ describe("Books test", () => {
               firstName: "J.K.",
               lastName: "Rowling",
             },
+            coverImage: null,
+            description: "",
           },
         },
       },
@@ -95,7 +98,7 @@ describe("Books test", () => {
           coverImage: null,
           categoryIds: [],
           description:
-            "Harry Potter and the Chamber of Secrets is a 1998 young adult fantasy novel by J.K. Rowling, the second in the Harry Potter series. The story follows Harry’s tumultuous second year at Hogwarts School of Witchcraft and Wizardry, including an encounter with Voldemort, the wizard who killed Harry’s parents. Against this fantastic backdrop, Rowling examines such themes as death, fame, friendship, choice, and prejudice. Upon release, the novel became a worldwide bestseller and won several awards, including Children’s Book of the Year at the British Book Awards and the Nestlé Smarties Book Award; it was subsequently adapted into a 2002 film directed by Chris Columbus.",
+            "Harry Potter and the Chamber of Secrets is a 1998 young adult fantasy novel by J.K. Rowling, the second in the Harry Potter series.",
         },
       },
       result: {
@@ -108,6 +111,10 @@ describe("Books test", () => {
               firstName: "J.K.",
               lastName: "Rowling",
             },
+            description:
+              "Harry Potter and the Chamber of Secrets is a 1998 young adult fantasy novel by J.K. Rowling, the second in the Harry Potter series.",
+            coverImage: null,
+            categories: [],
           },
         },
       },
@@ -133,9 +140,12 @@ describe("Books test", () => {
       ),
     });
 
-    await waitFor(() => expect(result.current.booksLoading).toBe(false), {
-      timeout: 3000,
-    });
+    await act(
+      async () =>
+        await waitFor(() => expect(result.current.booksLoading).toBe(false), {
+          timeout: 3000,
+        })
+    );
     expect(result.current.booksLoading).toBe(false);
     expect(result.current.booksError).toBe(undefined);
     expect(result.current.books).toEqual([
@@ -147,6 +157,7 @@ describe("Books test", () => {
           firstName: "J.K.",
           lastName: "Rowling",
         },
+        coverImage: null,
       },
     ]);
   });
@@ -170,6 +181,8 @@ describe("Books test", () => {
         firstName: "J.K.",
         lastName: "Rowling",
       },
+      coverImage: null,
+      description: "",
     });
   });
   it("should call useAddBook hook without error", async () => {
@@ -179,12 +192,15 @@ describe("Books test", () => {
       ),
     });
 
-    await result.current.addBook(
-      "Harry Potter and the Chamber of Secrets",
-      "J.K. Rowling",
-      null,
-      [],
-      "Harry Potter and the Chamber of Secrets is a 1998 young adult fantasy novel by J.K. Rowling, the second in the Harry Potter series. The story follows Harry’s tumultuous second year at Hogwarts School of Witchcraft and Wizardry, including an encounter with Voldemort, the wizard who killed Harry’s parents. Against this fantastic backdrop, Rowling examines such themes as death, fame, friendship, choice, and prejudice. Upon release, the novel became a worldwide bestseller and won several awards, including Children’s Book of the Year at the British Book Awards and the Nestlé Smarties Book Award; it was subsequently adapted into a 2002 film directed by Chris Columbus."
+    await act(
+      async () =>
+        await result.current.addBook(
+          "Harry Potter and the Chamber of Secrets",
+          "J.K. Rowling",
+          null,
+          [],
+          "Harry Potter and the Chamber of Secrets is a 1998 young adult fantasy novel by J.K. Rowling, the second in the Harry Potter series."
+        )
     );
     expect(result.current.addBookLoading).toBe(false);
     expect(result.current.addBookError).toBe(undefined);
@@ -196,6 +212,10 @@ describe("Books test", () => {
         firstName: "J.K.",
         lastName: "Rowling",
       },
+      coverImage: null,
+      description:
+        "Harry Potter and the Chamber of Secrets is a 1998 young adult fantasy novel by J.K. Rowling, the second in the Harry Potter series.",
+      categories: [],
     });
   });
   it("should call useRemoveBook hook without error", async () => {
