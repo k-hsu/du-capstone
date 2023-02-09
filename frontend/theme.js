@@ -28,6 +28,12 @@ export const color = {
   red: "#F00",
 };
 
+const breakpoints = [576, 780];
+
+export const mediaQuery = breakpoints.map(
+  (breakpoint) => `@media (max-width: ${breakpoint}px)`
+);
+
 export const typography = {
   h1: {
     fontWeight: fontWeight.bold,
