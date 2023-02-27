@@ -1,43 +1,30 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import { render, screen, userEvent, waitFor } from "../../../test-utils";
-import Button from "../../../components/Button/Button";
-import Text from "../../../components/Text/Text";
-import Modal from "../../../components/Modal/Modal";
 import AddBookModal from "../../../components/AddBookModal/AddBookModal";
 
-jest.mock("../../../components/Modal/Modal");
 describe("Add Book Modal", () => {
-  let onCloseMock;
-  let onSubmitMock;
-  beforeEach(() => {
-    onCloseMock = jest.fn();
-    onSubmitMock = jest.fn();
-    Modal.mockImplementation(
-      ({
-        title,
-        children,
-        onClose,
-        onSubmit,
-        cancelText = "Cancel",
-        submitText = "Submit",
-      }) => (
-        <>
-          <Text>{title}</Text>
-          {children}
-          <Button onClick={onClose}>{cancelText}</Button>
-          <Button onClick={onSubmit}>{submitText}</Button>
-        </>
-      )
-    );
-    render(<AddBookModal onSubmit={onSubmitMock} onClose={onCloseMock} />);
+  const onCloseMock = jest.fn();
+  let onSubmitMock = jest.fn();
+  beforeAll(() => {
+    ReactDOM.createPortal = jest.fn((element, node) => {
+      return element;
+    });
+  });
+  afterEach(() => {
+    ReactDOM.createPortal.mockClear();
   });
   it("should call onClose when the cancel button is clicked", () => {
+    render(<AddBookModal onSubmit={onSubmitMock} onClose={onCloseMock} />);
+
     const cancelButton = screen.getByText("Cancel");
     expect(cancelButton).toBeInTheDocument();
     userEvent.click(cancelButton);
     expect(onCloseMock).toHaveBeenCalledTimes(1);
   });
   it("should call onSubmit when the 'Add Book' button is clicked", async () => {
+    render(<AddBookModal onSubmit={onSubmitMock} onClose={onCloseMock} />);
+
     userEvent.type(
       screen.getByRole("textbox", { name: "Title" }),
       "Eye of the Tiger"

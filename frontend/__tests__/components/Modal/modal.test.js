@@ -1,16 +1,22 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import { render, screen, userEvent } from "../../../test-utils";
 import Modal from "../../../components/Modal/Modal";
 
 describe("Modal", () => {
-  const div = document.createElement("div");
-  div.id = "app-root";
+  beforeAll(() => {
+    ReactDOM.createPortal = jest.fn((element, node) => {
+      return element;
+    });
+  });
+  afterEach(() => {
+    ReactDOM.createPortal.mockClear();
+  });
   it("should render modal component", () => {
     render(
       <Modal title="Notification">
         You have been notified of a friend request
-      </Modal>,
-      { container: document.body.appendChild(div) }
+      </Modal>
     );
     expect(screen.getByText("Notification")).toBeInTheDocument();
     expect(
@@ -23,12 +29,9 @@ describe("Modal", () => {
   it("should call onClose when the close and cancel button is clicked", () => {
     const onCloseMock = jest.fn();
     render(
-      <div id="app-root">
-        <Modal title="Notification" onClose={onCloseMock}>
-          You have been notified of a friend request
-        </Modal>
-      </div>,
-      { container: document.body.appendChild(div) }
+      <Modal title="Notification" onClose={onCloseMock}>
+        You have been notified of a friend request
+      </Modal>
     );
     userEvent.click(screen.getByText("X"));
     userEvent.click(screen.getByText("Cancel"));
@@ -37,12 +40,9 @@ describe("Modal", () => {
   it("should call onSubmit when the close button is clicked", () => {
     const onSubmitMock = jest.fn();
     render(
-      <div id="app-root">
-        <Modal title="Notification" onSubmit={onSubmitMock}>
-          You have been notified of a friend request
-        </Modal>
-      </div>,
-      { container: document.body.appendChild(div) }
+      <Modal title="Notification" onSubmit={onSubmitMock}>
+        You have been notified of a friend request
+      </Modal>
     );
     userEvent.click(screen.getByText("Submit"));
     expect(onSubmitMock).toHaveBeenCalledTimes(1);
