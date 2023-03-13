@@ -3,7 +3,6 @@ import { render, screen, userEvent, waitFor } from "../../test-utils";
 import Index from "../../pages/index";
 import ToastProvider from "../../providers/ToastProvider/ToastProvider";
 import { useGetBooks, useAddBook } from "../../api/books";
-import AddBookModal from "../../components/AddBookModal/AddBookModal";
 
 jest.mock(
   "next/head",
@@ -13,8 +12,6 @@ jest.mock(
 );
 
 jest.mock("../../api/books");
-
-jest.mock("../../components/AddBookModal/AddBookModal");
 
 describe("Index page", () => {
   it("should render Index page with no books", () => {
@@ -58,37 +55,20 @@ describe("Index page", () => {
   it("should close Add Book Modal if onClose is called", () => {
     useGetBooks.mockReturnValue({ books: [] });
     useAddBook.mockReturnValue({ addBook: () => {} });
-    AddBookModal.mockImplementation(({ onClose }) => {
-      return <button onClick={onClose}>Book Is Being Added</button>;
-    });
+    render(<div id="app-root" />);
     render(<Index />);
 
     userEvent.click(screen.getByText("+ Add Book"));
-    expect(screen.getByText("Book Is Being Added")).toBeInTheDocument();
+    expect(screen.getByText("Cancel")).toBeInTheDocument();
 
-    userEvent.click(screen.getByText("Book Is Being Added"));
-    expect(screen.queryByText("Book Is Being Added")).toBeNull();
+    userEvent.click(screen.getByText("Cancel"));
+    expect(screen.queryByText("Cancel")).not.toBeInTheDocument();
   });
   it("should add book if onSubmit is called", async () => {
     const addBookMock = jest.fn();
     useGetBooks.mockReturnValue({ books: [] });
     useAddBook.mockReturnValue({ addBook: addBookMock });
-    AddBookModal.mockImplementation(({ onSubmit }) => {
-      return (
-        <button
-          onClick={() =>
-            onSubmit({
-              title: "Book",
-              author: "Encyclopedia Brown",
-              description:
-                'Encyclopedia Brown is a series of books featuring the adventures of boy detective Leroy Brown, nicknamed "Encyclopedia" for his intelligence and range of knowledge. The series of 29 children\'s novels was written (one co-written) by Donald J. Sobol, with the first book published in 1963 and the last published posthumously in 2012.',
-            })
-          }
-        >
-          Book Is Being Added
-        </button>
-      );
-    });
+    render(<div id="app-root" />);
     render(
       <ToastProvider>
         <Index />
@@ -96,11 +76,22 @@ describe("Index page", () => {
     );
 
     userEvent.click(screen.getByText("+ Add Book"));
-    expect(screen.getByText("Book Is Being Added")).toBeInTheDocument();
+    expect(screen.getByText("Add Book")).toBeInTheDocument();
 
-    userEvent.click(screen.getByText("Book Is Being Added"));
+    userEvent.type(screen.getByRole("textbox", { name: "Title" }), "Book");
+    userEvent.type(
+      screen.getByRole("textbox", { name: "Author" }),
+      "Encyclopedia Brown"
+    );
+    userEvent.type(
+      screen.getByRole("textbox", { name: "Description" }),
+      'Encyclopedia Brown is a series of books featuring the adventures of boy detective Leroy Brown, nicknamed "Encyclopedia" for his intelligence and range of knowledge. The series of 29 children\'s novels was written (one co-written) by Donald J. Sobol, with the first book published in 1963 and the last published posthumously in 2012.'
+    );
+
+    userEvent.click(screen.getByText("Add Book"));
+
     await waitFor(
-      () => expect(screen.queryByText("Book Is Being Added")).toBeNull(),
+      () => expect(screen.queryByText("Add Book")).not.toBeInTheDocument(),
       {
         timeout: 3000,
       }

@@ -1,20 +1,12 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { render, screen, userEvent, waitFor } from "../../../test-utils";
 import AddBookModal from "../../../components/AddBookModal/AddBookModal";
 
 describe("Add Book Modal", () => {
   const onCloseMock = jest.fn();
   let onSubmitMock = jest.fn();
-  beforeAll(() => {
-    ReactDOM.createPortal = jest.fn((element, node) => {
-      return element;
-    });
-  });
-  afterEach(() => {
-    ReactDOM.createPortal.mockClear();
-  });
   it("should call onClose when the cancel button is clicked", () => {
+    render(<div id="app-root" />);
     render(<AddBookModal onSubmit={onSubmitMock} onClose={onCloseMock} />);
 
     const cancelButton = screen.getByText("Cancel");
@@ -23,6 +15,7 @@ describe("Add Book Modal", () => {
     expect(onCloseMock).toHaveBeenCalledTimes(1);
   });
   it("should call onSubmit when the 'Add Book' button is clicked", async () => {
+    render(<div id="app-root" />);
     render(<AddBookModal onSubmit={onSubmitMock} onClose={onCloseMock} />);
 
     userEvent.type(
